@@ -8,6 +8,8 @@ First public release.
 - One prompt to paste: a short plain-language brief on top (scene, mood, how elements relate, the
   rules that must not fail, the aspect ratio), with the JSON details underneath.
 - Works by copy and paste in the free Gemini app or ChatGPT. No API key or setup.
+- Each prompt comes with four short instructions: where to paste it (new chat or the same one),
+  the target size, what to attach, then the prompt.
 - Five frameworks: text-to-image, multimodal, web-search, text rendering and creative director.
 - Model IDs, sizes, limits and prompting rules for each model in `references/`, each with a
   "last checked" date.

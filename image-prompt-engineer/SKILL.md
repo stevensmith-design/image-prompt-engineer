@@ -312,17 +312,47 @@ then the JSON details underneath. The brief sets the overall direction and relat
 pins down every detail (see Step 5). Show the user, in this order:
 
 1. **Assumptions** (only if you skipped questions): one line listing what you assumed.
-2. **Prompt to paste**: one plain code block containing:
+2. **Prompt heading**: a bold one-line title, e.g. "**Prompt: hero photo**". For a set of images,
+   number them: "**Prompt 2 of 4: close-up**".
+3. **Instructions**: a short bullet list directly above the code block, so the user knows exactly
+   what to do before they paste:
+   - **Where:** the free app, and whether to start a **new chat** or stay in the **same chat**. Use
+     a new chat for an unrelated image, so earlier images don't bleed into the style. Use the same
+     chat for an edit or the next image in a set ("in the same chat, after the hero photo you just
+     made"). Add the paid option only as a short aside: "For 2K, use AI Studio with a paid API key."
+   - **Target:** the aspect ratio, plus a minimum pixel size when the use needs one (print, a slide,
+     a banner).
+   - **Attach:** which images to attach, in order and by role ("Image 1: your product photo. Image
+     2: the moodboard."), or "nothing".
+   - **Paste:** the last bullet, ending with a colon, immediately before the code block.
+4. **The prompt**: one plain code block containing:
    - the `natural_language_prompt` as a single paragraph (for complex GPT Image prompts, short
      labelled lines instead, one line per section), then
    - a blank line, then
    - the JSON content fields, pretty-printed. Leave out `output` (those are settings, chosen in the
      app) and `natural_language_prompt` (it's already on top).
-3. **Settings**: one line that works whatever tool the user pastes into, since you usually won't
-   know. Name the free app, then the settings to pick if their tool has them, e.g. "Paste into the
-   Gemini app. With a paid API key in AI Studio, pick Nano Banana Pro, 16:9, 2K." Don't ask which
-   app they use just to write this line. The prompt already works without the settings.
-4. **Refinement options** from Step 8, as a short list.
+5. **Refinement options** from Step 8, as a short list.
+
+Keep the instructions to four short bullets. They must work whatever tool the user pastes into,
+since you usually won't know, so name the free app first and don't ask which app they use just to
+write them. The prompt already works without any settings.
+
+Example:
+
+````markdown
+**Prompt 1 of 2: hero photo**
+
+- **Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+- **Target:** 16:9, at least 1024×576 px.
+- **Attach:** nothing.
+- **Paste:**
+
+```
+<brief>
+
+<JSON details>
+```
+````
 
 Don't show the JSON a second time in a separate block: the combined prompt is the one place the
 user reads, checks and changes the details. If the user asks for prose only, give the brief on its
@@ -344,8 +374,8 @@ A single small red paper boat floating on perfectly calm water, in the lower thi
 
 **Answer in the chat, never in a file.** Don't write the prompt to a Markdown or other file unless
 the user asks you to save it. A file makes the user go and find it, open it, and work out where the
-prompt starts. Put the bold label "**Prompt to paste**" directly above the code block so it is easy
-to find in a long reply. Write the summary paragraph with no hard line breaks (labelled GPT Image
+prompt starts. The heading and the instructions above the code block make it easy to find in a
+long reply. Write the summary paragraph with no hard line breaks (labelled GPT Image
 lines are one line each), so it copies cleanly from a terminal. For a full example of the answer
 format, see the end of `references/examples.md`.
 

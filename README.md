@@ -110,11 +110,20 @@ already use.
    prompt for a logo sticker". The skill triggers on its own.
 2. **Answer a few questions,** or say "just go ahead" to skip them. The skill fills the gaps with
    sensible defaults and tells you what it assumed.
-3. **Copy the prompt.** The reply has one block labelled **Prompt to paste**: a plain-language
-   summary on top and the JSON details underneath. Copy the whole block, both parts together. The
-   line under it says where to paste it and which settings to pick.
+3. **Follow the short instructions and copy the prompt.** Each prompt comes with four lines telling
+   you what to do: where to paste it (and whether in a new chat or the same one), the target size,
+   what to attach, then the prompt itself in one block. The block has a plain-language brief on top
+   and the JSON details underneath. Copy the whole block, both parts together.
 
-   In Claude.ai and Claude Desktop, use the copy button on the **Prompt to paste** block. In Claude
+   ```
+   Prompt 2 of 3: close-up
+   - Where: the Gemini app, in the same chat, after the hero photo you just made.
+   - Target: 16:9, at least 1024×576 px.
+   - Attach: nothing.
+   - Paste:
+   ```
+
+   In Claude.ai and Claude Desktop, use the copy button on the prompt block. In Claude
    Code (terminal or IDE), say **copy** and the skill puts the prompt on your clipboard. It never
    copies without asking, so it won't overwrite something you've already copied.
 4. **Paste it into your image app:**

@@ -4,16 +4,16 @@
     {
       "id": 1,
       "prompt": "Just go ahead and write me an image prompt for a hero image of a quiet Kyoto tea house at dawn for my blog. Don't ask questions.",
-      "expected_output": "No interview. Assumptions line, one combined Prompt to paste block (summary paragraph then JSON details) targeting Nano Banana 2.1 at 16:9, settings line, refinement options.",
+      "expected_output": "No interview. Assumptions line, a prompt heading, Where/Target/Attach/Paste instructions, one code block (brief then JSON details) targeting Nano Banana 2.1 at 16:9, refinement options.",
       "files": [],
       "expectations": [
         "Does not ask any questions before producing the prompt",
         "Includes a one-line assumptions note that names the assumed model",
-        "Has exactly one code block labelled Prompt to paste",
+        "Has a bold prompt heading and exactly one prompt code block",
         "That block starts with a single summary paragraph, followed by a blank line and a JSON object",
         "The summary paragraph ends with a format sentence giving orientation and aspect ratio (16:9)",
         "The JSON in the block has operation and subject, and does not include output or natural_language_prompt",
-        "A settings line names the Gemini app, and mentions AI Studio only as a paid-API-key option",
+        "Instructions above the block cover Where (Gemini app, new chat), Target (16:9) and Attach (nothing), ending with Paste:; AI Studio appears only as a paid-API-key aside",
         "Ends with refinement options"
       ]
     },
@@ -24,11 +24,11 @@
       "files": [],
       "expectations": [
         "Targets GPT Image, not Nano Banana",
-        "The settings line names a GPT Image 2.5 model (gpt-image-2.5-sunburst or gpt-image-2.5-flare), a transparent background and a 1:1 size such as 1024x1024",
+        "The instructions name a GPT Image 2.5 model (gpt-image-2.5-sunburst or gpt-image-2.5-flare), a transparent background and a 1:1 size such as 1024x1024",
         "The brief asks for a transparent background in words",
         "The prompt puts \"Slow Pour\" (or \"SLOW POUR\") in double quotes",
         "The prompt says no other text should appear",
-        "The settings line does not use a Nano Banana resolution such as 2K"
+        "The instructions do not use a Nano Banana resolution such as 2K"
       ]
     },
     {
@@ -52,7 +52,8 @@
         "references array has three entries, each with an image number and a role",
         "The prompt refers to the inputs as Image 1, Image 2 and Image 3",
         "The prompt says the vase's appearance must be preserved",
-        "Tells the user to attach the images in the same order"
+        "Tells the user to attach the images in the same order",
+        "The Attach instruction lists the three images in order with their roles"
       ]
     },
     {
@@ -87,7 +88,8 @@
         "operation is edit",
         "The JSON has a preserve field listing what must stay the same",
         "The prompt describes exactly one change (the countertop)",
-        "The prompt says everything else should stay the same"
+        "The prompt says everything else should stay the same",
+        "The Where instruction says to use the same chat as the original image, or to attach the image"
       ]
     },
     {
@@ -130,7 +132,7 @@
       "files": [],
       "expectations": [
         "Does not create or write any file containing the prompt",
-        "The reply labels the block **Prompt to paste**, with summary and JSON together in one block",
+        "The reply has a prompt heading and Where/Target/Attach/Paste instructions above one block holding the brief and JSON together",
         "Does not run scripts/copy_prompt.py or any other clipboard command unprompted",
         "Offers to copy the prompt to the clipboard if the user says copy",
         "The summary paragraph ends with a format sentence giving orientation and aspect ratio"

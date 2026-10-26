@@ -36,8 +36,8 @@ SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` a
 }
 ```
 
-Settings line: "Paste into the Gemini app. With a paid API key in AI Studio, pick Nano Banana 2.1,
-4:5, 2K."
+Instructions: "**Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+**Target:** portrait 4:5. **Attach:** nothing."
 
 ---
 
@@ -106,8 +106,9 @@ Settings line: "Paste into the Gemini app. With a paid API key in AI Studio, pic
 }
 ```
 
-Settings line: "Attach both images in ChatGPT, product first, then paste. With a paid API key, send
-both through the edits endpoint in the same order, size 1536x1024, quality high."
+Instructions: "**Where:** ChatGPT, in a new chat. With a paid API key, use the edits endpoint at
+1536x1024, quality high. **Target:** landscape 3:2. **Attach:** Image 1: the bottle photo. Image 2:
+the meadow photo, in that order."
 
 ---
 
@@ -168,7 +169,7 @@ For the next storyboard frame, keep the same reference and `style`, and change o
 }
 ```
 
-Settings line: "Paste into the Gemini app, which searches for you." For GPT Image: look the weather up first, then replace the search instruction with the facts
+Instructions: "**Where:** the Gemini app, in a new chat (it searches for you). **Attach:** nothing." For GPT Image: look the weather up first, then replace the search instruction with the facts
 ("A rainy evening in Shibuya...").
 
 ---
@@ -234,8 +235,9 @@ translated into Japanese." Check the translation with a native speaker before us
 }
 ```
 
-Uses GPT Image's labelled-section style, one line per section. Settings line: "Paste into ChatGPT.
-With a paid API key, set background to transparent, PNG output, size 1024x1024."
+Uses GPT Image's labelled-section style, one line per section. Instructions: "**Where:** ChatGPT, in
+a new chat. With a paid API key, set background to transparent, PNG, 1024x1024. **Target:** square
+1:1, transparent background. **Attach:** nothing."
 
 ---
 
@@ -362,14 +364,19 @@ detail; JSON alone kept the detail but misread "left/right" seating and dropped 
 
 ## The Complete Answer, as the User Sees It
 
-This is Example 1 rendered in the Step 6 format: assumptions, one **Prompt to paste** block (brief,
-blank line, JSON without `output` and `natural_language_prompt`), the settings line, the copy offer
+This is Example 1 rendered in the Step 6 format: assumptions, a heading, the instructions, one code
+block (brief, blank line, JSON without `output` and `natural_language_prompt`), the copy offer
 (Claude Code only) and refinements.
 
 ````markdown
 Assumptions: Nano Banana 2.1, portrait 4:5, cinematic studio lighting.
 
-**Prompt to paste**
+**Prompt: fashion editorial**
+
+- **Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+- **Target:** portrait 4:5, at least 1024×1280 px for print.
+- **Attach:** nothing.
+- **Paste:**
 
 ```
 A striking fashion model wearing a tailored brown dress, sleek boots and holding a structured handbag, posing with a confident, statuesque stance, slightly turned. A seamless, deep cherry red studio backdrop. Medium-full shot, center-framed. Fashion magazine editorial, shot on medium-format analog film with pronounced grain, high saturation, cinematic hard key light with soft fill. Portrait 4:5 format.
@@ -390,8 +397,6 @@ A striking fashion model wearing a tailored brown dress, sleek boots and holding
   "lighting": "Cinematic hard key light with soft fill"
 }
 ```
-
-Paste into the Gemini app. With a paid API key in AI Studio, pick Nano Banana 2.1, 4:5, 2K.
 
 Say **copy** and I'll put it on your clipboard.
 
