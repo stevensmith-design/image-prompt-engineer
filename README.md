@@ -43,7 +43,21 @@ with Nano Banana in the Gemini app, from prompts written by this skill or its ea
     <td width="50%"><img src="docs/images/still-life-photo.jpeg" alt="Photograph of a straw rope boat decorated with pine and red berries on a dark wooden workbench"><br><sub><b>Still-life photography.</b> Materials, texture and moody low-key light.</sub></td>
     <td width="50%"><img src="docs/images/minimal-interior.jpeg" alt="Photo of a quiet building lobby with a single long branch of white camellias in a round clay vase"><br><sub><b>Minimal interior.</b> Restraint and negative space, with one element carrying the image.</sub></td>
   </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/station-installation.jpeg" alt="Photo of a young tree with exposed roots growing from a mound of moss on the concrete floor of a station concourse, ticket gates behind"><br><sub><b>Unexpected object, ordinary place.</b> A tree rooted in moss on a station concourse floor.</sub></td>
+    <td width="50%"><img src="docs/images/panorama-4x1.jpeg" alt="Very wide photo of a long, wild arrangement of branches, ferns and pale yellow and white flowers on a wooden plank against a black wall"><br><sub><b>Extreme 4:1 panorama.</b> A banner-shaped image, a format Nano Banana supports and GPT Image can't.</sub></td>
+  </tr>
 </table>
+
+### A complex scene
+
+<img src="docs/images/ramen-stall-json-only.jpeg" alt="Cinematic photo of a ramen stall in a rainy Tokyo alley at night: an elderly chef ladling broth, a woman in a yellow raincoat and a tired salaryman at opposite ends of the counter, red lanterns reading ラーメン, a Japanese menu board">
+
+<sub><b>The ramen stall from the skill's own testing</b>: three people, two light sources, rain, steam
+and Japanese text. This is the JSON-only version. It got the detail right (the tired salaryman, the
+chef's headband, the ラーメン lantern), but seated the customers at opposite ends and dropped the
+English from the menu. The brief-on-top format fixes exactly those two things: relationships and
+must-not-fail rules go in the brief. See [Example 9](image-prompt-engineer/references/examples.md).</sub>
 
 ### A matched set: sketch, then photo, then detail
 
