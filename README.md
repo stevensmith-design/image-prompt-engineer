@@ -1,10 +1,12 @@
 # Image Prompt Engineer
 
-A Claude skill that turns a rough image idea into a structured JSON prompt, then into the best
-prompt for **Nano Banana** (Google Gemini Image) or **GPT Image** (OpenAI / ChatGPT).
+A Claude skill that writes detailed image prompts for you. Describe the image in a sentence; get
+back a prompt for **Nano Banana** (Google Gemini Image) or **GPT Image** (OpenAI / ChatGPT) that
+spells out everything the model needs to get it right.
 
-It runs a short creative interview, fills in a JSON spec covering subject, composition, lighting,
-camera, text and references, and assembles a prompt that follows each model's own prompting rules.
+Writing a good image prompt by hand takes time: subject, framing, light, lens, materials, exact
+text, who stands where. This skill does that work. It runs a short creative interview (or skips it
+if you say "just go"), fills in every detail, and writes the prompt the way each model reads best.
 You copy it and paste it into the Gemini app or ChatGPT. No API key or setup needed.
 
 If you do have an API key, there's an optional script that lets Claude Code generate the image,
@@ -36,6 +38,11 @@ each other.
 
 ## What it covers
 
+It handles five kinds of image, and combines them when a brief needs more than one:
+**text-to-image** from scratch, **multimodal** work with your reference images, **web-search**
+images that reflect live data, **text rendering** for typography and other languages, and
+**creative director** control over camera, lens, lighting and film stock.
+
 | | Nano Banana | GPT Image |
 |---|---|---|
 | Models | 2.1 (default), Pro, 2, 2 Lite | 2.5 Sunburst (default), 2.5 Flare, 2 |
@@ -58,7 +65,7 @@ The skill asks one or two questions if it needs to (or skips them if you say "ju
 returns one prompt to paste:
 
 ```
-A ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam rising, in a small apartment kitchen with soft city rooftops blurred outside the window. ...
+A cinematic lifestyle photo of a ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam rising, in a small apartment kitchen with soft city rooftops blurred outside the window. The mug sits in the lower-left third, with wide, empty window light above for a headline. Low early-morning sun from the right casts long, soft shadows, warm amber highlights against muted shadows. Wide 16:9 landscape format.
 
 {
   "operation": "generate",
@@ -83,14 +90,14 @@ More worked examples: [`references/examples.md`](image-prompt-engineer/reference
 **Claude Code**
 
 ```bash
-git clone https://github.com/<your-username>/image-prompt-engineer.git
+git clone https://github.com/stevensmith-design/image-prompt-engineer.git
 cp -r image-prompt-engineer/image-prompt-engineer ~/.claude/skills/
 ```
 
 **Claude.ai and Claude Desktop**
 
 Download `image-prompt-engineer.skill` from the
-[latest release](../../releases/latest), then upload it under **Settings → Capabilities → Skills**.
+[latest release](https://github.com/stevensmith-design/image-prompt-engineer/releases/latest), then upload it under **Settings → Capabilities → Skills**.
 (To build it yourself, run `./build.sh`.)
 
 ## How to use it
@@ -135,11 +142,12 @@ packages.
 
 ```bash
 export GEMINI_API_KEY=...   # or OPENAI_API_KEY=...
+GEN=~/.claude/skills/image-prompt-engineer/scripts/generate.py
 
-python3 generate.py --spec prompts/hero.json --out images/
-python3 generate.py --spec prompts/hero.json --send prose     # summary only (or --send json)
-python3 generate.py --spec prompts/edit.json --ref images/hero.jpg
-python3 generate.py --spec prompts/hero.json --dry-run        # print the request, send nothing
+python3 $GEN --spec prompts/hero.json --out images/
+python3 $GEN --spec prompts/hero.json --send prose     # brief only (or --send json)
+python3 $GEN --spec prompts/edit.json --ref images/hero.jpg
+python3 $GEN --spec prompts/hero.json --dry-run        # print the request, send nothing
 ```
 
 Settings are read from the spec's `output` block. Each image is saved with a `.json` record of the

@@ -63,7 +63,8 @@ always carries the aspect ratio, and settings are a bonus where the tool has the
   background ("subject in the lower-right third, wide empty sky above").
 - **References:** stay within the per-model limits above. For characters, say "keep the exact face,
   hair and clothing from Image 1". Use Pro when the user wants dedicated style references.
-- **Sequential art and storyboards** work best with Pro and Nano Banana 2.
+- **Sequential art and storyboards:** Google names Pro and Nano Banana 2 as the strongest; 2.1, its
+  successor, also handles them well and is the default.
 - **Editing:** attach the image and say what should change and what should stay the same. The model
   matches the original's style, lighting and perspective. For several rounds of edits, continue the
   same conversation (or pass `previous_interaction_id` in the API) instead of starting over.

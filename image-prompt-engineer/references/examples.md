@@ -1,7 +1,8 @@
 # Worked Examples
 
-Nine examples across the five frameworks and both model families. Each shows the JSON spec and
-the assembled prompt. Read the one closest to the user's request when you need a model answer.
+Nine examples across the five frameworks and both model families. Each shows the full internal
+spec, with the brief in `natural_language_prompt`. Read the one closest to the user's request when
+you need a model answer. The last section shows a complete answer exactly as the user sees it.
 
 These are the full internal specs. What the user pastes is the combined prompt from Step 6 of
 SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` and
@@ -31,12 +32,12 @@ SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` a
     "aspect_ratio": "4:5",
     "resolution": "2K"
   },
-  "natural_language_prompt": "A striking fashion model wearing a tailored brown dress, sleek boots and holding a structured handbag, posing with a confident, statuesque stance, slightly turned. A seamless, deep cherry red studio backdrop. Medium-full shot, center-framed. Fashion magazine editorial, shot on medium-format analog film with pronounced grain, high saturation, cinematic hard key light with soft fill."
+  "natural_language_prompt": "A striking fashion model wearing a tailored brown dress, sleek boots and holding a structured handbag, posing with a confident, statuesque stance, slightly turned. A seamless, deep cherry red studio backdrop. Medium-full shot, center-framed. Fashion magazine editorial, shot on medium-format analog film with pronounced grain, high saturation, cinematic hard key light with soft fill. Portrait 4:5 format."
 }
 ```
 
-Paste into the Gemini app, ending the brief with "Portrait 4:5 format." With a paid API key in AI
-Studio, pick Nano Banana 2.1, 4:5, 2K.
+Settings line: "Paste into the Gemini app. With a paid API key in AI Studio, pick Nano Banana 2.1,
+4:5, 2K."
 
 ---
 
@@ -69,7 +70,7 @@ Studio, pick Nano Banana 2.1, 4:5, 2K.
     "aspect_ratio": "21:9",
     "resolution": "4K"
   },
-  "natural_language_prompt": "An abandoned Japanese train station platform, empty and overgrown with moss and wildflowers forcing through cracks in the concrete. Dense cedar forest is visible through the open sides of the platform. Wide establishing shot from a low angle looking down the length of the platform. Shot on a Nikon F3 with a 24mm wide-angle lens at f/5.6, deep focus. Overcast diffused daylight filtering through the forest canopy. Kodak Portra 400, warm and slightly faded, muted greens and warm yellows. Fine art photography."
+  "natural_language_prompt": "An abandoned Japanese train station platform, empty and overgrown with moss and wildflowers forcing through cracks in the concrete. Dense cedar forest is visible through the open sides of the platform. Wide establishing shot from a low angle looking down the length of the platform. Shot on a Nikon F3 with a 24mm wide-angle lens at f/5.6, deep focus. Overcast diffused daylight filtering through the forest canopy. Kodak Portra 400, warm and slightly faded, muted greens and warm yellows. Fine art photography. Ultra-wide 21:9 format."
 }
 ```
 
@@ -101,12 +102,12 @@ Studio, pick Nano Banana 2.1, 4:5, 2K.
     "size": "1536x1024",
     "quality": "high"
   },
-  "natural_language_prompt": "A photorealistic outdoor lifestyle product photo. Image 1 is the product: a matte black stainless steel water bottle. Image 2 is the background: a misty alpine meadow at sunrise. Place the bottle from Image 1 resting naturally on a granite boulder in the meadow from Image 2. Low angle close shot, with the mountain range softly blurred behind. Low sunrise backlight with a slight lens flare, cool morning tones. Keep the bottle's exact shape, finish and logo from Image 1 unchanged. No added text or watermarks."
+  "natural_language_prompt": "A photorealistic outdoor lifestyle product photo. Image 1 is the product: a matte black stainless steel water bottle. Image 2 is the background: a misty alpine meadow at sunrise. Place the bottle from Image 1 resting naturally on a granite boulder in the meadow from Image 2. Low angle close shot, with the mountain range softly blurred behind. Low sunrise backlight with a slight lens flare, cool morning tones. Keep the bottle's exact shape, finish and logo from Image 1 unchanged. No added text or watermarks. Landscape 3:2 format."
 }
 ```
 
-Send through the edits endpoint with both images attached, in order. In ChatGPT, attach both
-images and add "Landscape, 3:2." at the end.
+Settings line: "Attach both images in ChatGPT, product first, then paste. With a paid API key, send
+both through the edits endpoint in the same order, size 1536x1024, quality high."
 
 ---
 
@@ -133,7 +134,7 @@ images and add "Landscape, 3:2." at the end.
     "aspect_ratio": "16:9",
     "resolution": "2K"
   },
-  "natural_language_prompt": "Using Image 1 as the character reference, keep the exact face, red hair and trench coat of the woman. She is walking purposefully through a crowded Tokyo alley night market, neon signs overhead and steam rising from food stalls. Medium shot from behind and slightly to the left, tracking her movement. Cinematic thriller film still, deep shadows, neon cyan and magenta highlights."
+  "natural_language_prompt": "Using Image 1 as the character reference, keep the exact face, red hair and trench coat of the woman. She is walking purposefully through a crowded Tokyo alley night market, neon signs overhead and steam rising from food stalls. Medium shot from behind and slightly to the left, tracking her movement. Cinematic thriller film still, deep shadows, neon cyan and magenta highlights. Wide 16:9 landscape format."
 }
 ```
 
@@ -163,16 +164,16 @@ For the next storyboard frame, keep the same reference and `style`, and change o
     "aspect_ratio": "16:9",
     "resolution": "2K"
   },
-  "natural_language_prompt": "Search for the current weather and time of day in Shibuya, Tokyo. Use this data to set the lighting and atmosphere: if it is sunny and daytime, warm golden light and dense crowds; if it is raining, a grey sky, wet reflective streets and people with umbrellas; if it is night, neon lights reflected on wet pavement. Render Shibuya Crossing as an elevated wide shot from above the pedestrian crossing. Cinematic urban photography, high-resolution digital."
+  "natural_language_prompt": "Search for the current weather and time of day in Shibuya, Tokyo. Use this data to set the lighting and atmosphere: if it is sunny and daytime, warm golden light and dense crowds; if it is raining, a grey sky, wet reflective streets and people with umbrellas; if it is night, neon lights reflected on wet pavement. Render Shibuya Crossing as an elevated wide shot from above the pedestrian crossing. Cinematic urban photography, high-resolution digital. Wide 16:9 landscape format."
 }
 ```
 
-For GPT Image: look the weather up first, then replace the search instruction with the facts
+Settings line: "Paste into the Gemini app, which searches for you." For GPT Image: look the weather up first, then replace the search instruction with the facts
 ("A rainy evening in Shibuya...").
 
 ---
 
-## 6. Text Rendering + Localization — Beauty Promo (Nano Banana Pro)
+## 6. Text Rendering, Then Localization — Beauty Promo (Nano Banana Pro)
 
 ```json
 {
@@ -191,15 +192,17 @@ For GPT Image: look the weather up first, then replace the search instruction wi
     {"content": "10% OFF", "style": "heavy, blocky condensed sans-serif", "placement": "middle line"},
     {"content": "Your First Order", "style": "thin, minimalist geometric sans-serif", "placement": "bottom line"}
   ],
-  "localization": {"source_language": "English", "target_languages": ["Japanese"]},
   "output": {
     "model": "gemini-3-pro-image",
     "aspect_ratio": "4:5",
     "resolution": "2K"
   },
-  "natural_language_prompt": "A high-end, glossy commercial beauty shot of a sleek, minimalist nude-coloured face moisturiser jar on a warm beige studio background, soft radiant lighting. To the right of the product, render three lines of text: top line \"GLOW\" in a flowing, elegant brush script; middle line \"10% OFF\" in a heavy, blocky condensed sans-serif; bottom line \"Your First Order\" in a thin, minimalist geometric sans-serif. No other text. Then render the same design with all text translated into Japanese."
+  "natural_language_prompt": "A high-end, glossy commercial beauty shot of a sleek, minimalist nude-coloured face moisturiser jar on a warm beige studio background, soft radiant lighting. To the right of the product, render three lines of text: top line \"GLOW\" in a flowing, elegant brush script; middle line \"10% OFF\" in a heavy, blocky condensed sans-serif; bottom line \"Your First Order\" in a thin, minimalist geometric sans-serif. No other text. Portrait 4:5 format."
 }
 ```
+
+For the Japanese version, follow up after the first image: "The same design with all text
+translated into Japanese." Check the translation with a native speaker before using it.
 
 ---
 
@@ -227,12 +230,12 @@ For GPT Image: look the weather up first, then replace the search instruction wi
     "quality": "high",
     "background": "transparent"
   },
-  "natural_language_prompt": "A circular sticker badge for a specialty coffee roaster, in a flat vector-style illustration.\nSubject: a simple line drawing of a coffee bean with a small leaf in the center of the badge.\nText: \"SLOW POUR\" in a bold rounded sans-serif curved along the top edge; \"ROASTERS · EST. 2026\" in small spaced-out capitals curved along the bottom edge. No other text.\nColours: deep forest green and cream only.\nComposition: a single centered badge, flat front view, generous padding around the edge, nothing outside the badge."
+  "natural_language_prompt": "A circular sticker badge for a specialty coffee roaster, in a flat vector-style illustration.\nSubject: a simple line drawing of a coffee bean with a small leaf in the center of the badge.\nText: \"SLOW POUR\" in a bold rounded sans-serif curved along the top edge; \"ROASTERS · EST. 2026\" in small spaced-out capitals curved along the bottom edge. No other text.\nColours: deep forest green and cream only.\nComposition: a single centered badge, flat front view, generous padding around the edge, nothing outside the badge.\nFormat: Transparent background. Square 1:1 format."
 }
 ```
 
-Uses GPT Image's labelled-section style. Set `background: transparent` with PNG output. In ChatGPT,
-add "Transparent background." at the end.
+Uses GPT Image's labelled-section style, one line per section. Settings line: "Paste into ChatGPT.
+With a paid API key, set background to transparent, PNG output, size 1024x1024."
 
 ---
 
@@ -257,7 +260,7 @@ add "Transparent background." at the end.
     "aspect_ratio": "3:2",
     "size": "1536x1024"
   },
-  "natural_language_prompt": "Edit Image 1. Replace the grey sofa with a deep green velvet sofa of the same size, in the same position. Keep everything else exactly the same: the camera angle and framing, the lighting and shadows, and every other object, including the rug, plants and artwork. Do not add any text, logos or watermarks."
+  "natural_language_prompt": "Edit Image 1. Replace the grey sofa with a deep green velvet sofa of the same size, in the same position. Keep everything else exactly the same: the camera angle and framing, the lighting and shadows, and every other object, including the rug, plants and artwork. Do not add any text, logos or watermarks. Keep the original 3:2 landscape framing."
 }
 ```
 
@@ -354,3 +357,47 @@ detail; JSON alone kept the detail but misread "left/right" seating and dropped 
   "natural_language_prompt": "A cinematic film still of a late-night ramen stall in a narrow Tokyo alley in heavy rain, warm lantern light against the cold blue night. An elderly chef works behind the counter, facing two customers who sit side by side on adjacent stools on the same side of the counter: a young woman in a yellow raincoat and a tired salaryman. A hanging wooden menu board lists three dishes, and every line shows the Japanese name, the English name and the price together. A red paper lantern reads \"ラーメン\". Only the menu and lantern have readable text. Follow the details below exactly. Wide 16:9 landscape format."
 }
 ```
+
+---
+
+## The Complete Answer, as the User Sees It
+
+This is Example 1 rendered in the Step 6 format: assumptions, one **Prompt to paste** block (brief,
+blank line, JSON without `output` and `natural_language_prompt`), the settings line, the copy offer
+(Claude Code only) and refinements.
+
+````markdown
+Assumptions: Nano Banana 2.1, portrait 4:5, cinematic studio lighting.
+
+**Prompt to paste**
+
+```
+A striking fashion model wearing a tailored brown dress, sleek boots and holding a structured handbag, posing with a confident, statuesque stance, slightly turned. A seamless, deep cherry red studio backdrop. Medium-full shot, center-framed. Fashion magazine editorial, shot on medium-format analog film with pronounced grain, high saturation, cinematic hard key light with soft fill. Portrait 4:5 format.
+
+{
+  "operation": "generate",
+  "framework": "text-to-image",
+  "subject": "A striking fashion model wearing a tailored brown dress, sleek boots and a structured handbag",
+  "action": "Posing with a confident, statuesque stance, slightly turned",
+  "location_context": "Seamless deep cherry red studio backdrop",
+  "composition": "Medium-full shot, center-framed",
+  "style": {
+    "genre": "fashion magazine editorial",
+    "medium": "medium-format analog film",
+    "film_stock": "pronounced grain",
+    "color_grading": "high saturation"
+  },
+  "lighting": "Cinematic hard key light with soft fill"
+}
+```
+
+Paste into the Gemini app. With a paid API key in AI Studio, pick Nano Banana 2.1, 4:5, 2K.
+
+Say **copy** and I'll put it on your clipboard.
+
+**Refinements**
+1. Tell me what to change and I'll update the prompt.
+2. If you've generated it and want to change one area, attach the image and tell me what must stay the same.
+3. Want the same image prompted for GPT Image, to compare?
+````
+

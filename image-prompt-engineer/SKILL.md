@@ -1,6 +1,6 @@
 ---
 name: image-prompt-engineer
-description: "Writes structured JSON prompts for AI image generation and editing, tuned for Google's Nano Banana (Gemini Image) and OpenAI's GPT Image models. Use whenever the user wants to create or edit an image with Nano Banana, Gemini, GPT Image or ChatGPT, asks for an image prompt, or wants a structured or JSON image prompt. Runs a short creative interview, builds a JSON spec, and assembles a copy-and-paste prompt for the chosen model's app, with no setup needed. Optionally generates the image through an API when the user has a key."
+description: "Writes detailed, high-quality AI image prompts so the user doesn't have to: a plain-language brief plus structured JSON details, tuned for Google's Nano Banana (Gemini Image) and OpenAI's GPT Image models. Use whenever the user wants to create or edit an image with Nano Banana, Gemini, GPT Image, ChatGPT or DALL-E, asks for an image prompt or a text-to-image prompt, or wants a structured or JSON image prompt. Runs a short creative interview and returns one copy-and-paste prompt, with no setup needed. Optionally generates the image through an API when the user has a key."
 license: MIT
 metadata:
   author: Steven Smith
@@ -193,12 +193,14 @@ The JSON has two kinds of fields:
     }
   ],
 
+  "constraints": "Must-hold rules that don't belong to one element, e.g. only the menu board has readable text",
+
   "preserve": ["Elements that must not change in an edit, e.g. the face, the logo, the camera angle"],
 
   "output": {
     "model": "gemini-nano-banana-2.1 | gpt-image-2.5-sunburst | ...",
     "aspect_ratio": "16:9",
-    "resolution": "1K | 2K | 4K (Nano Banana)",
+    "resolution": "0.5K | 1K | 2K | 4K (Nano Banana; 0.5K on Nano Banana 2 only)",
     "size": "1536x1024 (GPT Image)",
     "quality": "auto | low | medium | high | xhigh | max (GPT Image)",
     "background": "transparent (GPT Image, only when needed)"
@@ -236,15 +238,16 @@ then apply the model-specific rules in the reference file.
 
 Prose is better at relationships and overall rules. JSON is better at keeping many small attributes
 attached to the right element. For a simple image (one subject, no text) the summary can cover
-nearly everything. For a complex one, keep the summary to four or five sentences and let the JSON
-hold the rest. Anything stated in both must say the same thing.
+nearly everything. For a complex one, keep the summary to about five sentences plus the closing format sentence,
+and let the JSON hold the rest. Anything stated in both must say the same thing.
 
 **Rules for both model families:**
 
 - **Be specific and concrete.** "A matte black steel water bottle on a granite boulder" beats
   "a nice product shot outdoors".
 - **Describe what you want, not what you don't.** "A plain cream background" works better than
-  "no clutter". If a few exclusions are still needed, put them in one short sentence at the end.
+  "no clutter". If a few exclusions are still needed, put them in one short sentence near the end,
+  just before the closing format sentence.
 - **Watch genre words.** "Sketch", "concept", "proposal", "diagram", "blueprint" and "infographic"
   invite labels, arrows and callouts. If the image should have no text, describe it as a finished,
   unannotated illustration (e.g. "a clean, unannotated watercolour illustration") rather than
@@ -256,30 +259,40 @@ hold the rest. Anything stated in both must say the same thing.
 - **For edits, say what stays.** State the one change, then list what must be preserved exactly.
 - **Camera terms set the look; they are not a physics simulation.** "85mm, f/1.8" reliably gives a
   shallow-focus portrait look, not exact optics.
+- **Always close with the format.** The brief's last sentence is the orientation and aspect ratio,
+  in this pattern: "Wide 16:9 landscape format.", "Portrait 4:5 format.", "Square 1:1 format.",
+  "Ultra-wide 21:9 format." For a transparent background (GPT Image), say so in the same closing
+  line: "Transparent background. Square 1:1 format." For an edit that keeps the original frame,
+  close with "Keep the original 3:2 landscape framing."
+
+Every formula below ends with `[Exclusions, if any]. [Format sentence].`
 
 ### Text-to-Image Formula
 ```
 [Subject]. [Action]. [Location/context]. [Composition]. [Style genre], [medium], [film stock],
-[color grade], [lighting].
+[color grade], [lighting]. [Exclusions, if any]. [Format sentence].
 ```
 
 ### Multimodal Formula
 ```
 Using [numbered references and their roles], [relationship instruction]: [transformation goal].
 [New scenario with location and composition]. [Style]. Keep [preserved elements] unchanged.
+[Exclusions, if any]. [Format sentence].
 ```
 
 ### Web-Search Formula
 ```
 [Search query instruction]. Use this data to [modification logic]. Visualize as
-[visual concept with composition and style].
+[visual concept with composition and style]. [Exclusions, if any]. [Format sentence].
 ```
 
 ### Text Rendering Formula
 ```
 [Base scene description]. Render [N] lines of text: [per line: content in quotes, font style,
-placement]. [Localization instruction if applicable]. No other text.
+placement]. No other text. [Format sentence].
 ```
+For localization, generate the first version, then ask for "the same design with the text
+translated into <language>" as a follow-up, rather than asking for two images in one prompt.
 If the user is iterating on wording, use the text-first approach: settle the exact copy in chat
 first, then generate the full image.
 
@@ -287,6 +300,7 @@ first, then generate the full image.
 ```
 [Subject + action + location]. Shot on [hardware] with [lens], [angle], [aperture/focus].
 [Lighting setup]. [Film stock / color grade]. [Key materials]. [Style genre].
+[Exclusions, if any]. [Format sentence].
 ```
 
 ---
@@ -299,7 +313,8 @@ pins down every detail (see Step 5). Show the user, in this order:
 
 1. **Assumptions** (only if you skipped questions): one line listing what you assumed.
 2. **Prompt to paste**: one plain code block containing:
-   - the `natural_language_prompt` as a single paragraph, then
+   - the `natural_language_prompt` as a single paragraph (for complex GPT Image prompts, short
+     labelled lines instead, one line per section), then
    - a blank line, then
    - the JSON content fields, pretty-printed. Leave out `output` (those are settings, chosen in the
      app) and `natural_language_prompt` (it's already on top).
@@ -310,13 +325,14 @@ pins down every detail (see Step 5). Show the user, in this order:
 4. **Refinement options** from Step 8, as a short list.
 
 Don't show the JSON a second time in a separate block: the combined prompt is the one place the
-user reads, checks and changes the details. If the user asks for prose only (or JSON only), give
-that part on its own instead.
+user reads, checks and changes the details. If the user asks for prose only, give the brief on its
+own. If they ask for JSON only, give the JSON content fields and add a top-level `"format"` field
+with the format sentence, so the aspect ratio isn't lost.
 
 Example of the combined block:
 
 ```
-A single small red paper boat floating on perfectly calm water, in the lower third of the frame. ... Portrait, 2:3.
+A single small red paper boat floating on perfectly calm water, in the lower third of the frame. ... Portrait 2:3 format.
 
 {
   "operation": "generate",
@@ -329,8 +345,9 @@ A single small red paper boat floating on perfectly calm water, in the lower thi
 **Answer in the chat, never in a file.** Don't write the prompt to a Markdown or other file unless
 the user asks you to save it. A file makes the user go and find it, open it, and work out where the
 prompt starts. Put the bold label "**Prompt to paste**" directly above the code block so it is easy
-to find in a long reply. Write the summary paragraph with no hard line breaks, so it copies
-cleanly from a terminal.
+to find in a long reply. Write the summary paragraph with no hard line breaks (labelled GPT Image
+lines are one line each), so it copies cleanly from a terminal. For a full example of the answer
+format, see the end of `references/examples.md`.
 
 **Offer to copy it to the clipboard when you can run commands** (Claude Code in a terminal or IDE).
 Never copy without being asked: copying replaces whatever the user already has on their clipboard,
@@ -361,7 +378,8 @@ Only use this step when the user asks you to generate the image for them, or has
 and no key is set, say which variable the script needs, and point them back to the paste-ready
 prompt in the meantime.
 
-1. Save the JSON spec to a file, e.g. `prompts/<short-name>.json`.
+1. Save the JSON spec to a file, e.g. `prompts/<short-name>.json` (the script needs a file; this is
+   the one exception to answering in the chat).
 2. Run the bundled script (it uses only the Python standard library):
    ```bash
    python3 <skill-dir>/scripts/generate.py --spec prompts/<short-name>.json --out images/

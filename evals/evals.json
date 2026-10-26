@@ -11,8 +11,9 @@
         "Includes a one-line assumptions note that names the assumed model",
         "Has exactly one code block labelled Prompt to paste",
         "That block starts with a single summary paragraph, followed by a blank line and a JSON object",
+        "The summary paragraph ends with a format sentence giving orientation and aspect ratio (16:9)",
         "The JSON in the block has operation and subject, and does not include output or natural_language_prompt",
-        "A settings line names Nano Banana 2.1 and aspect ratio 16:9",
+        "A settings line names the Gemini app, and mentions AI Studio only as a paid-API-key option",
         "Ends with refinement options"
       ]
     },
@@ -22,12 +23,12 @@
       "expected_output": "Targets GPT Image, sets background transparent, quotes the exact brand text, sets a 1:1 size.",
       "files": [],
       "expectations": [
-        "output.model is a GPT Image 2.5 model ID (gpt-image-2.5-sunburst or gpt-image-2.5-flare)",
-        "output.background is transparent",
-        "output.size is a valid WIDTHxHEIGHT such as 1024x1024",
+        "Targets GPT Image, not Nano Banana",
+        "The settings line names a GPT Image 2.5 model (gpt-image-2.5-sunburst or gpt-image-2.5-flare), a transparent background and a 1:1 size such as 1024x1024",
+        "The brief asks for a transparent background in words",
         "The prompt puts \"Slow Pour\" (or \"SLOW POUR\") in double quotes",
         "The prompt says no other text should appear",
-        "Does not use a Nano Banana resolution field like 2K in output"
+        "The settings line does not use a Nano Banana resolution such as 2K"
       ]
     },
     {
@@ -37,7 +38,7 @@
       "files": [],
       "expectations": [
         "Targets GPT Image, not Nano Banana",
-        "The paste-ready prompt itself states the portrait orientation or a portrait aspect ratio such as 2:3 or 4:5",
+        "The brief ends with a format sentence giving a portrait aspect ratio such as 2:3 or 4:5",
         "Tells the user to paste it into ChatGPT"
       ]
     },
@@ -68,13 +69,13 @@
     {
       "id": 6,
       "prompt": "Create a Nano Banana prompt for an event poster: headline 'Design Systems Night', subtitle 'Tokyo · 14 November', and I also want a Japanese version.",
-      "expected_output": "Text rendering + localization; exact text quoted; Japanese localization; may recommend Nano Banana Pro for text-heavy work.",
+      "expected_output": "Text rendering; exact text quoted; English version first, with the Japanese version offered as a follow-up request; may recommend Nano Banana Pro for text-heavy work.",
       "files": [],
       "expectations": [
         "framework includes text-rendering",
         "text_elements contains 'Design Systems Night' and 'Tokyo · 14 November' exactly",
-        "localization.target_languages includes Japanese",
-        "The prompt puts each line of text in double quotes"
+        "The prompt puts each line of text in double quotes",
+        "Gives the Japanese version as a follow-up request (or a second prompt), not as two images in one prompt"
       ]
     },
     {
@@ -96,7 +97,7 @@
       "files": [],
       "expectations": [
         "Says GPT Image does not support 8:1 (maximum 3:1)",
-        "Offers a 3:1 size or suggests Nano Banana 2.1 for a true 8:1",
+        "Offers a 3:1 size (3072x1024) or suggests Nano Banana 2.1 for a true 8:1",
         "Any GPT Image size given is a valid size within the 3:1 limit"
       ]
     },
@@ -131,18 +132,30 @@
         "Does not create or write any file containing the prompt",
         "The reply labels the block **Prompt to paste**, with summary and JSON together in one block",
         "Does not run scripts/copy_prompt.py or any other clipboard command unprompted",
-        "Offers to copy the prompt to the clipboard if the user says copy"
+        "Offers to copy the prompt to the clipboard if the user says copy",
+        "The summary paragraph ends with a format sentence giving orientation and aspect ratio"
       ]
     },
     {
       "id": 12,
-      "prompt": "(In Claude Code, after the skill has just given a prompt) copy",
-      "expected_output": "Runs copy_prompt.py with the exact paste-ready prompt from the previous reply and confirms in one line.",
+      "prompt": "(In Claude Code) You just gave me this prompt:\n\nA single small red paper boat floating on perfectly calm water, in the lower third of the frame. Portrait 2:3 format.\n\n{\n  \"operation\": \"generate\",\n  \"subject\": \"A single small red paper boat\"\n}\n\ncopy",
+      "expected_output": "Runs copy_prompt.py with the exact combined prompt quoted in the message and confirms in one line.",
       "files": [],
       "expectations": [
         "Runs scripts/copy_prompt.py with a quoted heredoc",
-        "The copied text matches the previous combined Prompt to paste exactly, summary and JSON together",
+        "The copied text matches the quoted combined prompt exactly, brief and JSON together",
         "Confirms in one line without repeating the whole reply"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Give me a Nano Banana prompt for a minimalist product shot of a white ceramic teapot. Where should I paste it?",
+      "expected_output": "Recommends the free Gemini app; mentions AI Studio only as needing a paid API key.",
+      "files": [],
+      "expectations": [
+        "Recommends pasting into the Gemini app",
+        "If AI Studio is mentioned, says it needs a paid API key",
+        "The summary paragraph ends with a format sentence giving orientation and aspect ratio"
       ]
     }
   ]

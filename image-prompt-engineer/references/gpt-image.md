@@ -33,6 +33,7 @@ Map aspect ratios to sizes like this:
 | 4:5 / 5:4 | 1024x1280 / 1280x1024 | — |
 | 16:9 / 9:16 | 2048x1152 / 1152x2048 | 3840x2160 / 2160x3840 |
 | 21:9 | 2688x1152 | — |
+| 3:1 / 1:3 | 3072x1024 / 1024x3072 | — |
 
 Ratios beyond 3:1 (such as `1:4`, `4:1`, `8:1`) are not possible. Offer `3:1` / `1:3` instead, or
 suggest Nano Banana.
@@ -57,7 +58,7 @@ You usually won't know where the user pastes, so the prompt must work in all of 
 always carries the aspect ratio, and settings are a bonus where the tool has them.
 
 - **ChatGPT**: paste the prompt into a chat. ChatGPT has no size or model setting, so write the
-  aspect ratio and orientation into the prompt as a closing sentence ("Landscape, 16:9."), and ask
+  aspect ratio and orientation into the prompt as a closing sentence ("Wide 16:9 landscape format."), and ask
   for a transparent background in words if needed.
 - **OpenAI Playground / API**: set model, size, quality and background as parameters. Needs an
   OpenAI API account with billing, so mention it only for users who already have one. See

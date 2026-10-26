@@ -38,6 +38,7 @@ OPENAI_SIZES = {
     "5:4": "1280x1024", "4:5": "1024x1280",
     "16:9": "2048x1152", "9:16": "1152x2048",
     "21:9": "2688x1152",
+    "3:1": "3072x1024", "1:3": "1024x3072",
 }
 
 # Spec fields that are settings or derived output, not image content.
@@ -51,11 +52,19 @@ def fail(message):
     sys.exit(1)
 
 
+def warn(message):
+    print(f"warning: {message}", file=sys.stderr)
+
+
 def load_spec(path):
     text = Path(path).read_text(encoding="utf-8")
+    looks_like_json = path.endswith(".json") or text.lstrip().startswith(("{", "["))
     try:
         spec = json.loads(text)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as err:
+        # Don't send a broken spec to a paid API as if it were a plain-text prompt.
+        if looks_like_json:
+            fail(f"{path} is not valid JSON: {err}")
         return {"natural_language_prompt": text.strip()}
     if not isinstance(spec, dict):
         fail(f"{path} must contain a JSON object")
@@ -64,7 +73,7 @@ def load_spec(path):
 
 def build_prompt(spec, send):
     """combined: summary paragraph, blank line, JSON details (what the skill tells users to paste)."""
-    summary = spec.get("natural_language_prompt", "").strip()
+    summary = (spec.get("natural_language_prompt") or "").strip()
     content = {k: v for k, v in spec.items() if k not in NON_CONTENT_FIELDS}
     details = json.dumps(content, indent=2, ensure_ascii=False) if content else ""
     if send == "prose" or (send == "combined" and not details):
@@ -192,7 +201,7 @@ def openai_fields(args, prompt):
         fields["quality"] = args.quality
     if args.background:
         fields["background"] = args.background
-    if args.n > 1:
+    if args.n != 1:
         fields["n"] = str(args.n)
     return fields
 
@@ -204,7 +213,7 @@ def multipart(fields, files):
         chunks.append(f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n{value}\r\n'.encode())
     for name, path in files:
         data, mime = read_image(path)
-        filename = Path(path).name
+        filename = Path(path).name.replace('"', "_").replace("\r", "_").replace("\n", "_")
         chunks.append(
             f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"; filename="{filename}"\r\n'
             f"Content-Type: {mime}\r\n\r\n".encode() + data + b"\r\n"
@@ -255,8 +264,8 @@ def main():
                         help="combined: summary then JSON details (default); prose: summary only; json: details only")
     parser.add_argument("--provider", choices=["gemini", "openai"], help="inferred from the model if omitted")
     parser.add_argument("--model", help="model ID, e.g. gemini-nano-banana-2.1 or gpt-image-2.5-sunburst")
-    parser.add_argument("--aspect", help="aspect ratio, e.g. 16:9")
-    parser.add_argument("--resolution", help="Gemini only: 1K, 2K or 4K")
+    parser.add_argument("--aspect", help="aspect ratio, e.g. 16:9 (if neither spec nor flag sets one, the API default applies)")
+    parser.add_argument("--resolution", help="Gemini only: 0.5K (Nano Banana 2 only), 1K, 2K or 4K")
     parser.add_argument("--size", help="OpenAI only: WIDTHxHEIGHT or auto (overrides --aspect)")
     parser.add_argument("--quality", help="OpenAI only: auto, low, medium, high, xhigh, max")
     parser.add_argument("--background", help="OpenAI only: auto, opaque or transparent")
@@ -270,21 +279,51 @@ def main():
     parser.add_argument("--out", default="images", help="output directory (default: images)")
     parser.add_argument("--dry-run", action="store_true", help="print the request without sending it")
     args = parser.parse_args()
+    if args.n < 1:
+        parser.error("--n must be 1 or more")
+    if args.mask and not args.refs:
+        parser.error("--mask needs at least one --ref image to edit")
+    cli_aspect, cli_size = args.aspect, args.size
 
     spec = load_spec(args.spec) if args.spec else {"natural_language_prompt": args.prompt}
     prompt = build_prompt(spec, args.send)
     output = spec.get("output", {}) if isinstance(spec.get("output"), dict) else {}
 
+    if args.provider and not args.model and output.get("model") and \
+            pick_provider(output.get("model"), None) != args.provider:
+        # The spec was written for the other provider: use this provider's default model.
+        args.model = DEFAULT_MODELS[args.provider]
     args.model = args.model or output.get("model")
+    model_provider = pick_provider(args.model, None) if args.model else None
+    if args.provider and model_provider and model_provider != args.provider:
+        fail(f"--provider {args.provider} doesn't match model {args.model}")
     args.provider = pick_provider(args.model, args.provider)
     args.model = args.model or DEFAULT_MODELS[args.provider]
     args.aspect = args.aspect or output.get("aspect_ratio")
     if args.provider == "gemini":
         args.resolution = args.resolution or output.get("resolution")
     else:
-        args.size = args.size or output.get("size")
+        # An explicit --aspect beats a size written in the spec.
+        if not (cli_aspect and not cli_size):
+            args.size = args.size or output.get("size")
         args.quality = args.quality or output.get("quality")
         args.background = args.background or output.get("background")
+        if args.size and args.aspect and "x" in args.size:
+            try:
+                w, h = (int(v) for v in args.size.lower().split("x"))
+                a, b = (float(v) for v in args.aspect.split(":"))
+                if abs(w / h - a / b) > 0.05:
+                    warn(f"size {args.size} doesn't match aspect ratio {args.aspect}")
+            except ValueError:
+                pass
+
+    other = ("size", "quality", "background", "mask") if args.provider == "gemini" else \
+            ("resolution", "thinking", "search", "previous_id")
+    ignored = [name for name in other if getattr(args, name)]
+    if args.provider == "gemini" and args.n != 1:
+        ignored.append("n")
+    if ignored:
+        warn(f"ignored for {args.provider}: " + ", ".join("--" + n.replace("_", "-") for n in ignored))
 
     for path in args.refs + ([args.mask] if args.mask else []):
         if not Path(path).is_file():
@@ -318,8 +357,10 @@ def main():
         "provider": args.provider,
         "model": args.model,
         "prompt": prompt,
-        "settings": {k: getattr(args, k) for k in ("aspect", "resolution", "size", "quality", "background", "thinking")
+        "settings": {k: getattr(args, k) for k in ("aspect", "resolution", "size", "quality", "background", "thinking",
+                                                   "search", "previous_id", "send")
                      if getattr(args, k, None)},
+        "n": args.n,
         "references": args.refs,
         "images": saved,
         **{k: v for k, v in meta.items() if v},
