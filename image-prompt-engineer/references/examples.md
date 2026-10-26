@@ -3,6 +3,10 @@
 Eight examples across the five frameworks and both model families. Each shows the JSON spec and
 the assembled prompt. Read the one closest to the user's request when you need a model answer.
 
+These are the full internal specs. What the user pastes is the combined prompt from Step 6 of
+SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` and
+`natural_language_prompt`.
+
 ---
 
 ## 1. Text-to-Image — Fashion Editorial (Nano Banana)

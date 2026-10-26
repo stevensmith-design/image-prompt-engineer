@@ -20,8 +20,8 @@ setup or API key is needed. Generating the image through an API is an optional e
 
 The JSON is the core of the method. It forces every dimension of the image (subject, composition,
 light, camera, text) to be stated explicitly, which removes ambiguity, and it makes iteration
-predictable: to change one thing, change one field. Both model families also accept JSON-like
-structures pasted directly as the prompt.
+predictable: to change one thing, change one field. The user pastes a single prompt: a plain-language summary on top, with the JSON details underneath.
+Both model families read JSON-like structures in a prompt.
 
 ---
 
@@ -103,7 +103,7 @@ made in one line above the output. Never ask more than five questions in one go.
 
 ## Step 4 — Build the JSON Prompt
 
-Output a populated JSON object. All fields are optional except `operation`, `subject` and `output`.
+Build a populated JSON object. All fields are optional except `operation`, `subject` and `output`.
 Omit fields that don't apply: never leave empty strings. When frameworks stack, make `framework`
 an array, e.g. `["text-to-image", "text-rendering"]`.
 
@@ -250,24 +250,41 @@ first, then generate the full image.
 
 ## Step 6 — Output Format
 
-Always show the user all of this, in this order:
+The user pastes **one prompt** that combines both parts: the natural-language summary on top,
+then the JSON details underneath. The summary tells the model what the image is as a whole. The
+JSON pins down every detail. Show the user, in this order:
 
 1. **Assumptions** (only if you skipped questions): one line listing what you assumed.
-2. **The full JSON prompt** in a `json` code block, with every field you filled in.
-3. **The prompt to paste**: the `natural_language_prompt` on its own in a plain code block. Add one
-   line saying where to paste it and which settings to choose there (model, aspect ratio, size or
-   quality), taken from the model's reference file. Mention that the JSON content fields can be
-   pasted instead if the user prefers to prompt with JSON.
+2. **Prompt to paste**: one plain code block containing:
+   - the `natural_language_prompt` as a single paragraph, then
+   - a blank line, then
+   - the JSON content fields, pretty-printed. Leave out `output` (those are settings, chosen in the
+     app) and `natural_language_prompt` (it's already on top).
+3. **Settings**: one line saying where to paste it and which settings to choose there (model,
+   aspect ratio, size or quality), taken from the model's reference file.
 4. **Refinement options** from Step 8, as a short list.
 
-Never reply with only the paste-ready prompt: the JSON is how the user sees and changes each part
-of the image.
+Don't show the JSON a second time in a separate block: the combined prompt is the one place the
+user reads, checks and changes the details. If the user asks for prose only (or JSON only), give
+that part on its own instead.
 
-**Answer in the chat, never in a file.** Don't write the prompt or the JSON to a Markdown or other
-file unless the user asks you to save it. A file makes the user go and find it, open it, and work
-out where the prompt starts. Put a bold label directly above each code block ("**JSON spec**",
-"**Prompt to paste**") so the prompt is easy to find in a long reply. Write the prompt to paste as
-one paragraph with no hard line breaks, except for GPT Image's labelled-section style, so it copies
+Example of the combined block:
+
+```
+A single small red paper boat floating on perfectly calm water, in the lower third of the frame. ... Portrait, 2:3.
+
+{
+  "operation": "generate",
+  "subject": "A single small red paper boat",
+  "composition": "Boat in the lower third, generous negative space above",
+  "lighting": "Soft, diffused morning light"
+}
+```
+
+**Answer in the chat, never in a file.** Don't write the prompt to a Markdown or other file unless
+the user asks you to save it. A file makes the user go and find it, open it, and work out where the
+prompt starts. Put the bold label "**Prompt to paste**" directly above the code block so it is easy
+to find in a long reply. Write the summary paragraph with no hard line breaks, so it copies
 cleanly from a terminal.
 
 **Offer to copy it to the clipboard when you can run commands** (Claude Code in a terminal or IDE).
@@ -278,14 +295,13 @@ conversation), run the bundled helper with a quoted heredoc so the shell leaves 
 
 ```bash
 python3 <skill-dir>/scripts/copy_prompt.py <<'PROMPT'
-<the prompt to paste, exactly as shown>
+<the full combined prompt, exactly as shown>
 PROMPT
 ```
 
-Then confirm in one line: "Copied. Paste it straight into <app>." If the user asks for the JSON
-instead, copy the JSON content fields. If the command fails, tell them to use the code block. In
-chat apps with no shell (Claude.ai, Claude Desktop), skip the offer, since code blocks already have
-a copy button.
+Then confirm in one line: "Copied. Paste it straight into <app>." If the command fails, tell them
+to use the code block. In chat apps with no shell (Claude.ai, Claude Desktop), skip the offer,
+since code blocks already have a copy button.
 
 ---
 

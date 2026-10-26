@@ -14,4 +14,5 @@ First public release. Grew out of `nano-banana-prompter`.
 - Generate-and-review loop for Claude Code.
 - Copy and paste is the default; API generation is opt-in and never pushed.
 - Prompts are answered in the chat with labelled blocks, never written to a file unless asked, with an opt-in clipboard copy in Claude Code (`scripts/copy_prompt.py`). It never copies unasked, so it never overwrites the clipboard.
+- The prompt to paste is one block: a plain-language summary on top, JSON details underneath. `generate.py` sends the same combined prompt by default.
 - Eight worked examples and twelve evals.

@@ -5,7 +5,7 @@ Standard library only. Reads the API key from GEMINI_API_KEY or OPENAI_API_KEY.
 
 Examples:
   python3 generate.py --spec prompts/hero.json --out images/
-  python3 generate.py --spec prompts/hero.json --send json          # send the JSON itself as the prompt
+  python3 generate.py --spec prompts/hero.json --send prose         # summary only, no JSON details
   python3 generate.py --prompt "A red fox in snow" --model gpt-image-2.5-flare --aspect 3:2
   python3 generate.py --spec prompts/edit.json --ref images/hero.png --dry-run
 
@@ -63,15 +63,19 @@ def load_spec(path):
 
 
 def build_prompt(spec, send):
-    if send == "json":
-        content = {k: v for k, v in spec.items() if k not in NON_CONTENT_FIELDS}
-        if not content:
-            fail("--send json needs a spec with content fields")
-        return json.dumps(content, indent=2, ensure_ascii=False)
-    prompt = spec.get("natural_language_prompt")
-    if not prompt:
-        fail("the spec has no natural_language_prompt (use --send json to send the JSON instead)")
-    return prompt
+    """combined: summary paragraph, blank line, JSON details (what the skill tells users to paste)."""
+    summary = spec.get("natural_language_prompt", "").strip()
+    content = {k: v for k, v in spec.items() if k not in NON_CONTENT_FIELDS}
+    details = json.dumps(content, indent=2, ensure_ascii=False) if content else ""
+    if send == "prose" or (send == "combined" and not details):
+        if not summary:
+            fail("the spec has no natural_language_prompt (use --send json to send the JSON instead)")
+        return summary
+    if send == "json" or not summary:
+        if not details:
+            fail("the spec has no content fields to send")
+        return details
+    return f"{summary}\n\n{details}"
 
 
 def pick_provider(model, provider):
@@ -247,8 +251,8 @@ def main():
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--spec", help="JSON spec file (or a plain-text prompt file)")
     source.add_argument("--prompt", help="prompt text")
-    parser.add_argument("--send", choices=["prose", "json"], default="prose",
-                        help="send the natural_language_prompt (default) or the JSON content fields")
+    parser.add_argument("--send", choices=["combined", "prose", "json"], default="combined",
+                        help="combined: summary then JSON details (default); prose: summary only; json: details only")
     parser.add_argument("--provider", choices=["gemini", "openai"], help="inferred from the model if omitted")
     parser.add_argument("--model", help="model ID, e.g. gemini-nano-banana-2.1 or gpt-image-2.5-sunburst")
     parser.add_argument("--aspect", help="aspect ratio, e.g. 16:9")

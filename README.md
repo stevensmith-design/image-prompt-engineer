@@ -22,9 +22,11 @@ font. That has three effects:
   stays put.
 - **Reuse.** Keep the `style` and `camera` blocks and swap the subject to make a consistent series.
 
-Both models accept JSON-like structures directly, so you can paste the JSON itself, or paste the
-assembled natural-language prompt the skill builds from it. Try both on your own images: the
-generation script's `--send json` flag makes that comparison easy.
+The prompt you paste combines both: a plain-language summary on top, so the model understands
+the image as a whole, and the JSON details underneath, so nothing is left to chance. Both models
+read JSON in a prompt. For simple images, prose alone often gives near-identical results, and you
+can ask for prose only. The JSON earns its place on complex images: several subjects, exact text,
+precise layout.
 
 ## What it covers
 
@@ -46,9 +48,12 @@ the date it was last checked against the official docs.
 
 > **You:** Hero image for a blog post about slow mornings. Warm, quiet, a bit cinematic. For Nano Banana.
 
-The skill asks one or two questions if it needs to (or skips them if you say "just go"), then returns:
+The skill asks one or two questions if it needs to (or skips them if you say "just go"), then
+returns one prompt to paste:
 
-```json
+```
+A ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam rising, in a small apartment kitchen with soft city rooftops blurred outside the window. ...
+
 {
   "operation": "generate",
   "framework": ["text-to-image", "creative-director"],
@@ -58,14 +63,12 @@ The skill asks one or two questions if it needs to (or skips them if you say "ju
   "composition": "Close-up, mug in the lower-left third, wide empty window light above for a headline",
   "camera": { "lens": "50mm", "aperture": "f/2", "focus": "shallow depth of field on the mug rim" },
   "lighting": "Low early-morning sun from camera-right, long soft shadows",
-  "style": { "genre": "cinematic lifestyle photography", "color_grading": "warm amber highlights, muted shadows" },
-  "output": { "model": "gemini-nano-banana-2.1", "aspect_ratio": "16:9", "resolution": "2K" },
-  "natural_language_prompt": "A ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam rising. ..."
+  "style": { "genre": "cinematic lifestyle photography", "color_grading": "warm amber highlights, muted shadows" }
 }
 ```
 
-It then shows the prompt to paste on its own, tells you where to paste it and which settings to
-pick, and offers refinements.
+Under it: "Paste into Google AI Studio. Model: Nano Banana 2.1, aspect ratio 16:9, resolution 2K."
+Then a short list of refinements.
 
 More worked examples: [`references/examples.md`](image-prompt-engineer/references/examples.md).
 
@@ -94,11 +97,9 @@ already use.
    prompt for a logo sticker". The skill triggers on its own.
 2. **Answer a few questions,** or say "just go ahead" to skip them. The skill fills the gaps with
    sensible defaults and tells you what it assumed.
-3. **Copy the prompt.** The reply has two labelled blocks:
-   - **JSON spec**: every decision about the image, field by field. Read this to check it, and to
-     say what to change.
-   - **Prompt to paste**: the prompt itself, with a line saying where to paste it and which
-     settings to pick.
+3. **Copy the prompt.** The reply has one block labelled **Prompt to paste**: a plain-language
+   summary on top and the JSON details underneath. Copy the whole block, both parts together. The
+   line under it says where to paste it and which settings to pick.
 
    In Claude.ai and Claude Desktop, use the copy button on the **Prompt to paste** block. In Claude
    Code (terminal or IDE), say **copy** and the skill puts the prompt on your clipboard. It never
@@ -112,7 +113,7 @@ already use.
    Japanese") and it updates the JSON and gives you a new prompt. To edit an image you've already
    generated, attach it and say what to change and what must stay the same.
 
-Prefer prompting with JSON? Ask for the JSON version and paste the JSON spec instead.
+Prefer one or the other? Ask for "prose only" or "JSON only".
 
 The skill answers in the chat. It doesn't write prompts to files unless you ask it to save them.
 
@@ -128,7 +129,7 @@ packages.
 export GEMINI_API_KEY=...   # or OPENAI_API_KEY=...
 
 python3 generate.py --spec prompts/hero.json --out images/
-python3 generate.py --spec prompts/hero.json --send json      # send the JSON instead of prose
+python3 generate.py --spec prompts/hero.json --send prose     # summary only (or --send json)
 python3 generate.py --spec prompts/edit.json --ref images/hero.jpg
 python3 generate.py --spec prompts/hero.json --dry-run        # print the request, send nothing
 ```

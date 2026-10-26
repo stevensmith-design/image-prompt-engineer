@@ -4,15 +4,15 @@
     {
       "id": 1,
       "prompt": "Just go ahead and write me an image prompt for a hero image of a quiet Kyoto tea house at dawn for my blog. Don't ask questions.",
-      "expected_output": "No interview. Assumptions line, full JSON spec targeting Nano Banana 2.1 at 16:9, paste-ready prose prompt, where to paste, refinement options.",
+      "expected_output": "No interview. Assumptions line, one combined Prompt to paste block (summary paragraph then JSON details) targeting Nano Banana 2.1 at 16:9, settings line, refinement options.",
       "files": [],
       "expectations": [
         "Does not ask any questions before producing the prompt",
         "Includes a one-line assumptions note that names the assumed model",
-        "Shows a JSON code block with operation, subject and output fields",
-        "output.model is gemini-nano-banana-2.1 and output.aspect_ratio is 16:9",
-        "Shows the natural_language_prompt again on its own in a plain code block",
-        "Says where to paste it and which settings to choose",
+        "Has exactly one code block labelled Prompt to paste",
+        "That block starts with a single summary paragraph, followed by a blank line and a JSON object",
+        "The JSON in the block has operation and subject, and does not include output or natural_language_prompt",
+        "A settings line names Nano Banana 2.1 and aspect ratio 16:9",
         "Ends with refinement options"
       ]
     },
@@ -129,7 +129,7 @@
       "files": [],
       "expectations": [
         "Does not create or write any file containing the prompt",
-        "The reply labels the blocks, e.g. **JSON spec** and **Prompt to paste**",
+        "The reply labels the block **Prompt to paste**, with summary and JSON together in one block",
         "Does not run scripts/copy_prompt.py or any other clipboard command unprompted",
         "Offers to copy the prompt to the clipboard if the user says copy"
       ]
@@ -141,7 +141,7 @@
       "files": [],
       "expectations": [
         "Runs scripts/copy_prompt.py with a quoted heredoc",
-        "The copied text matches the previous Prompt to paste exactly",
+        "The copied text matches the previous combined Prompt to paste exactly, summary and JSON together",
         "Confirms in one line without repeating the whole reply"
       ]
     }
