@@ -40,7 +40,8 @@ assemble a prompt for each.
 
 Then read the reference file for that model before writing anything. It holds the model IDs,
 sizes, limits, settings and model-specific prompting rules. Don't rely on memory for these: they
-change every few months. For worked examples of complete specs, read `references/examples.md`.
+change every few months. For worked examples of complete specs, read `references/examples.md`. Example 9 shows how a
+complex scene splits between brief and details.
 
 For any other image model (Midjourney, Flux, Stable Diffusion, Ideogram), say this skill is tuned for
 Nano Banana and GPT Image. The prose prompt usually still works with models that read full
@@ -124,6 +125,18 @@ The JSON has two kinds of fields:
   "location_context": "Setting, environment, backdrop",
   "composition": "Framing, e.g. medium-full shot, center-framed, rule of thirds",
 
+  "characters": [
+    {
+      "who": "Short label used in spatial_relationships, e.g. the chef",
+      "appearance": "Age, clothing, build, expression, posture",
+      "action": "What this person is doing"
+    }
+  ],
+
+  "spatial_relationships": [
+    "How elements sit relative to each other, e.g. the woman and the salaryman sit side by side on adjacent stools, both facing the chef"
+  ],
+
   "style": {
     "genre": "fashion editorial | product photography | concept art | etc.",
     "medium": "analog film | digital | oil painting | etc.",
@@ -151,6 +164,12 @@ The JSON has two kinds of fields:
       "content": "EXACT TEXT HERE",
       "style": "bold white sans-serif | thin geometric sans-serif | brush script | etc.",
       "placement": "top | center | bottom | etc."
+    },
+    {
+      "parts": {"japanese": "醤油ラーメン", "english": "Shoyu Ramen", "price": "¥950"},
+      "rule": "All three parts appear on the same line, in this order",
+      "style": "hand-painted brush lettering",
+      "placement": "menu board, line 1"
     }
   ],
 
@@ -189,12 +208,34 @@ The JSON has two kinds of fields:
 
 Use only the `output` keys that apply to the target model.
 
+- **Several people or objects:** describe each one in `characters` (or `materiality`), and put how
+  they relate in `spatial_relationships`. Never rely on absolute positions alone: "stool, left" and
+  "stool, right" can be read as opposite ends of a counter. Say "side by side on adjacent stools".
+- **Text in more than one language:** split each line into `parts` and add a `rule` saying all
+  parts appear together. A single mixed string like "醤油ラーメン Shoyu Ramen ¥950" lets the model drop
+  one language.
+
 ---
 
 ## Step 5 — Assemble the Natural Language Prompt
 
 Build `natural_language_prompt` from the content fields using the formula for the active framework,
 then apply the model-specific rules in the reference file.
+
+**The summary is the brief; the JSON is the details.** The two travel together in one prompt
+(Step 6), so they divide the work instead of repeating each other:
+
+- **The summary carries** what the image is, the mood, the overall composition, how the main
+  elements relate to each other (who is next to whom, what faces what), and the one to three
+  requirements that must not fail, stated plainly (e.g. "every menu line shows Japanese, English
+  and a price").
+- **The JSON carries** the fine detail: each character's appearance, exact text strings and their
+  parts, materials, camera and lighting specifics.
+
+Prose is better at relationships and overall rules. JSON is better at keeping many small attributes
+attached to the right element. For a simple image (one subject, no text) the summary can cover
+nearly everything. For a complex one, keep the summary to four or five sentences and let the JSON
+hold the rest. Anything stated in both must say the same thing.
 
 **Rules for both model families:**
 
@@ -250,9 +291,9 @@ first, then generate the full image.
 
 ## Step 6 — Output Format
 
-The user pastes **one prompt** that combines both parts: the natural-language summary on top,
-then the JSON details underneath. The summary tells the model what the image is as a whole. The
-JSON pins down every detail. Show the user, in this order:
+The user pastes **one prompt** that combines both parts: the brief on top (`natural_language_prompt`),
+then the JSON details underneath. The brief sets the overall direction and relationships. The JSON
+pins down every detail (see Step 5). Show the user, in this order:
 
 1. **Assumptions** (only if you skipped questions): one line listing what you assumed.
 2. **Prompt to paste**: one plain code block containing:

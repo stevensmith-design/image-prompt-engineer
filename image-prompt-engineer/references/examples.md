@@ -1,6 +1,6 @@
 # Worked Examples
 
-Eight examples across the five frameworks and both model families. Each shows the JSON spec and
+Nine examples across the five frameworks and both model families. Each shows the JSON spec and
 the assembled prompt. Read the one closest to the user's request when you need a model answer.
 
 These are the full internal specs. What the user pastes is the combined prompt from Step 6 of
@@ -257,5 +257,99 @@ add "Transparent background." at the end.
     "size": "1536x1024"
   },
   "natural_language_prompt": "Edit Image 1. Replace the grey sofa with a deep green velvet sofa of the same size, in the same position. Keep everything else exactly the same: the camera angle and framing, the lighting and shadows, and every other object, including the rug, plants and artwork. Do not add any text, logos or watermarks."
+}
+```
+
+---
+
+## 9. Complex Scene — Brief on Top, Details in JSON (Nano Banana Pro)
+
+Three people with set positions, bilingual text and two light sources. The brief carries the
+scene, the relationships and the rules that must not fail. The JSON carries the detail. Tested
+against prose alone and JSON alone: prose kept the seating and the bilingual menu right but lost
+detail; JSON alone kept the detail but misread "left/right" seating and dropped the English.
+
+```json
+{
+  "operation": "generate",
+  "framework": ["text-to-image", "text-rendering", "creative-director"],
+  "subject": "A late-night ramen stall in a narrow Tokyo alley in heavy rain",
+  "characters": [
+    {
+      "who": "the chef",
+      "appearance": "Elderly Japanese man, weathered face, white headband, white cook's jacket",
+      "action": "Ladling steaming broth from a large pot behind the counter"
+    },
+    {
+      "who": "the woman",
+      "appearance": "Young woman, bright yellow raincoat with the hood down",
+      "action": "Sitting at the counter, watching the chef"
+    },
+    {
+      "who": "the salaryman",
+      "appearance": "Middle-aged man, dark suit, loosened tie, slumped shoulders, tired eyes",
+      "action": "Sitting at the counter, elbows resting on it"
+    }
+  ],
+  "spatial_relationships": [
+    "The woman and the salaryman sit side by side on adjacent stools on the same side of the counter, both facing the chef",
+    "The chef faces them from behind the counter",
+    "The menu board hangs from the awning above the chef",
+    "The red lantern hangs at the left edge of the awning"
+  ],
+  "location_context": "Narrow Tokyo alley at night, stall under a dark canvas awning, wet cobblestones in the foreground",
+  "composition": "Eye-level medium-wide shot, stall centered, alley walls framing both sides, cobblestone reflections in the lower third",
+  "text_elements": [
+    {
+      "parts": {"japanese": "醤油ラーメン", "english": "Shoyu Ramen", "price": "¥950"},
+      "rule": "Japanese, English and price on the same line",
+      "style": "Hand-painted black brush lettering on wood",
+      "placement": "Menu board, line 1"
+    },
+    {
+      "parts": {"japanese": "味噌ラーメン", "english": "Miso Ramen", "price": "¥1,050"},
+      "rule": "Japanese, English and price on the same line",
+      "style": "Hand-painted black brush lettering on wood",
+      "placement": "Menu board, line 2"
+    },
+    {
+      "parts": {"japanese": "餃子", "english": "Gyoza", "price": "¥450"},
+      "rule": "Japanese, English and price on the same line",
+      "style": "Hand-painted black brush lettering on wood",
+      "placement": "Menu board, line 3"
+    },
+    {
+      "content": "ラーメン",
+      "style": "Black brush script, written vertically",
+      "placement": "Red paper lantern"
+    }
+  ],
+  "lighting": "Warm red-orange glow from the lantern and tungsten bulbs under the awning, cool blue ambient night light, rain streaks backlit by the lantern",
+  "materiality": [
+    "Weathered wooden menu board",
+    "Red paper lantern, slightly translucent",
+    "Rain-slick cobblestones",
+    "Steam rising from the broth pot"
+  ],
+  "camera": {
+    "hardware": "35mm motion picture camera",
+    "lens": "35mm",
+    "angle": "Eye level",
+    "aperture": "f/2.8",
+    "focus": "Stall and people sharp, background alley softly out of focus"
+  },
+  "style": {
+    "genre": "Cinematic film still",
+    "medium": "35mm motion picture film",
+    "film_stock": "Kodak Vision3 500T, fine grain",
+    "color_grading": "Warm tungsten highlights against cool blue shadows"
+  },
+  "constraints": "Only the menu board and the lantern have readable text; background signs are blurred and illegible",
+  "output": {
+    "model": "gemini-3-pro-image",
+    "aspect_ratio": "16:9",
+    "resolution": "2K"
+  },
+  "natural_language_prompt": "A cinematic film still of a late-night ramen stall in a narrow Tokyo alley in heavy rain, warm lantern light against the cold blue night. An elderly chef works behind the counter, facing two customers who sit side by side on adjacent stools on the same side of the counter: a young woman in a yellow raincoat and a tired salaryman. A hanging wooden menu board lists three dishes, and every line shows the Japanese name, the English name and the price together. A red paper lantern reads \"ラーメン\". Only the menu and lantern have readable text. Follow the details below exactly."
 }
 ```

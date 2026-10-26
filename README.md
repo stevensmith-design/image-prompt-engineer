@@ -28,6 +28,13 @@ read JSON in a prompt. For simple images, prose alone often gives near-identical
 can ask for prose only. The JSON earns its place on complex images: several subjects, exact text,
 precise layout.
 
+The two halves divide the work. The summary is the brief: the scene, the mood, how the main
+elements relate to each other ("sitting side by side"), and the rules that must not fail ("every
+menu line in Japanese and English"). The JSON holds the detail: each person's appearance, exact
+text, materials, camera and light. In testing, prose alone got relationships and overall rules
+right but lost detail, while JSON alone kept detail but misread positions. Together they cover
+each other.
+
 ## What it covers
 
 | | Nano Banana | GPT Image |
