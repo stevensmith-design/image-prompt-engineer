@@ -35,7 +35,8 @@ SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` a
 }
 ```
 
-Paste into Google AI Studio with Nano Banana 2.1, aspect ratio 4:5, resolution 2K.
+Paste into the Gemini app, ending the brief with "Portrait 4:5 format." With a paid API key in AI
+Studio, pick Nano Banana 2.1, 4:5, 2K.
 
 ---
 

@@ -5,8 +5,7 @@ prompt for **Nano Banana** (Google Gemini Image) or **GPT Image** (OpenAI / Chat
 
 It runs a short creative interview, fills in a JSON spec covering subject, composition, lighting,
 camera, text and references, and assembles a prompt that follows each model's own prompting rules.
-You copy it and paste it into the Gemini app, Google AI Studio or ChatGPT. No API key or setup
-needed.
+You copy it and paste it into the Gemini app or ChatGPT. No API key or setup needed.
 
 If you do have an API key, there's an optional script that lets Claude Code generate the image,
 review it against the spec and refine it. You don't need it to use the skill.
@@ -74,7 +73,7 @@ A ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam r
 }
 ```
 
-Under it: "Paste into Gemini or AI Studio. If your tool has settings, pick Nano Banana 2.1, 16:9, 2K."
+Under it: "Paste into the Gemini app." Then a note on settings, for anyone using a tool that has them.
 Then a short list of refinements.
 
 More worked examples: [`references/examples.md`](image-prompt-engineer/references/examples.md).
@@ -112,11 +111,12 @@ already use.
    Code (terminal or IDE), say **copy** and the skill puts the prompt on your clipboard. It never
    copies without asking, so it won't overwrite something you've already copied.
 4. **Paste it into your image app:**
-   - **Nano Banana**: the [Gemini app](https://gemini.google.com) (the aspect ratio is written into
-     the prompt, since the app has no setting for it) or [Google AI Studio](https://aistudio.google.com)
-     if you want to pick the model and resolution yourself.
-   - **GPT Image**: ChatGPT (the aspect ratio is written into the prompt, since ChatGPT has no
-     setting for it) or the OpenAI Playground.
+   - **Nano Banana**: the [Gemini app](https://gemini.google.com).
+   - **GPT Image**: [ChatGPT](https://chatgpt.com).
+
+   Neither app has an aspect ratio setting, so the skill writes it into the prompt. Free accounts
+   have daily image limits. Google AI Studio and the OpenAI Playground let you pick the exact model
+   and resolution, but generating images there needs a paid API key.
 5. **Refine.** Tell the skill what to change ("warmer light", "move the mug left", "make the text
    Japanese") and it updates the JSON and gives you a new prompt. To edit an image you've already
    generated, attach it and say what to change and what must stay the same.

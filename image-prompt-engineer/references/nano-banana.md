@@ -44,10 +44,12 @@ always carries the aspect ratio, and settings are a bonus where the tool has the
 - **Gemini app** (gemini.google.com or the mobile app): paste the prompt and send. The app has no
   aspect ratio or resolution setting and may choose the model itself, so the brief must end with the
   aspect ratio ("Wide 16:9 landscape format."). Don't promise a specific model or resolution here.
-  For text-heavy images, tell the user that results may vary with the model the app uses, and that
-  AI Studio lets them pick Nano Banana Pro.
+  For text-heavy images, tell the user that results may vary with the model the app uses. This is
+  the free option and the default to recommend.
 - **Google AI Studio** (aistudio.google.com): pick the model, aspect ratio and resolution in the
-  settings panel, then paste the prompt. Best for control.
+  settings panel, then paste the prompt. Best for control, but image generation needs a paid API
+  key with billing enabled (the free tier has no image quota). Mention it only as the option for
+  users who already have one.
 - **API / Vertex AI**: send the prompt as `input`, and set `aspect_ratio` and `image_size` in
   `response_format`. See `scripts/generate.py`.
 

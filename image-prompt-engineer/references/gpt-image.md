@@ -59,8 +59,9 @@ always carries the aspect ratio, and settings are a bonus where the tool has the
 - **ChatGPT**: paste the prompt into a chat. ChatGPT has no size or model setting, so write the
   aspect ratio and orientation into the prompt as a closing sentence ("Landscape, 16:9."), and ask
   for a transparent background in words if needed.
-- **OpenAI Playground / API**: set model, size, quality and background as parameters and keep them
-  out of the prompt text. See `scripts/generate.py`.
+- **OpenAI Playground / API**: set model, size, quality and background as parameters. Needs an
+  OpenAI API account with billing, so mention it only for users who already have one. See
+  `scripts/generate.py`.
 
 ## Prompting rules for GPT Image
 
