@@ -303,8 +303,10 @@ pins down every detail (see Step 5). Show the user, in this order:
    - a blank line, then
    - the JSON content fields, pretty-printed. Leave out `output` (those are settings, chosen in the
      app) and `natural_language_prompt` (it's already on top).
-3. **Settings**: one line saying where to paste it and which settings to choose there (model,
-   aspect ratio, size or quality), taken from the model's reference file.
+3. **Settings**: one line that works whatever tool the user pastes into, since you usually won't
+   know. Name the usual places, then the settings to pick if their tool has them, e.g. "Paste into
+   Gemini or AI Studio. If your tool has settings, pick Nano Banana Pro, 16:9, 2K." Don't ask which
+   app they use just to write this line. The prompt already works without the settings.
 4. **Refinement options** from Step 8, as a short list.
 
 Don't show the JSON a second time in a separate block: the combined prompt is the one place the

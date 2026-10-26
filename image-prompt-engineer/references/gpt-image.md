@@ -53,6 +53,9 @@ Only use `xhigh` or `max` when a lower setting has visibly failed: they are slow
 
 ## Where to paste
 
+You usually won't know where the user pastes, so the prompt must work in all of these. The brief
+always carries the aspect ratio, and settings are a bonus where the tool has them.
+
 - **ChatGPT**: paste the prompt into a chat. ChatGPT has no size or model setting, so write the
   aspect ratio and orientation into the prompt as a closing sentence ("Landscape, 16:9."), and ask
   for a transparent background in words if needed.

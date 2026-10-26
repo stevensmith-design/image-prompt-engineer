@@ -38,7 +38,8 @@ All outputs carry a SynthID watermark.
 
 ## Where to paste
 
-Assume the **Gemini app** unless the user says otherwise: it's where most people use Nano Banana.
+You usually won't know where the user pastes, so the prompt must work in all of these. The brief
+always carries the aspect ratio, and settings are a bonus where the tool has them.
 
 - **Gemini app** (gemini.google.com or the mobile app): paste the prompt and send. The app has no
   aspect ratio or resolution setting and may choose the model itself, so the brief must end with the
