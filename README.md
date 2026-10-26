@@ -74,7 +74,7 @@ A ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam r
 }
 ```
 
-Under it: "Paste into Google AI Studio. Model: Nano Banana 2.1, aspect ratio 16:9, resolution 2K."
+Under it: "Paste into the Gemini app. In AI Studio, pick Nano Banana 2.1, 16:9, 2K."
 Then a short list of refinements.
 
 More worked examples: [`references/examples.md`](image-prompt-engineer/references/examples.md).
