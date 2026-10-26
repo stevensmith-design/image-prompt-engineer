@@ -14,20 +14,48 @@ review it against the spec and refine it. You don't need it to use the skill.
 
 ## Made with it
 
-All generated with Nano Banana in the Gemini app, from prompts written by this skill's earlier
-version.
+These are just a few simple examples to give a feel for the range. The skill handles far more
+complex briefs than these: several people with set positions, exact text in more than one
+language, edits that change one thing and keep the rest, and matched sets of images. All were made
+with Nano Banana in the Gemini app, from prompts written by this skill or its earlier version.
+
+### Illustration, design and text
 
 <table>
   <tr>
     <td width="50%"><img src="docs/images/editorial-illustration.jpeg" alt="Hand-drawn illustration of a climber in an orange helmet abseiling down a wall of stacked blocks while small yellow characters build it"><br><sub><b>Editorial illustration.</b> A consistent character style, several figures, each doing something different.</sub></td>
-    <td width="50%"><img src="docs/images/still-life-photo.jpeg" alt="Photograph of a straw rope boat decorated with pine and red berries on a dark wooden workbench"><br><sub><b>Still-life photography.</b> Materials, texture and moody low-key light.</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/images/bilingual-logo.jpeg" alt="Logo with a green line-drawn bud icon, the Japanese word ツボ and the Latin word TSUBO"><br><sub><b>Bilingual logo.</b> Exact Japanese and Latin text rendered cleanly.</sub></td>
     <td width="50%"><img src="docs/images/text-in-illustration.jpeg" alt="Illustration of a small character on a stool pinning up a House rules poster next to an easel"><br><sub><b>Text inside an illustration.</b> The exact words, in the drawing's own style.</sub></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/images/blueprint-illustration.jpeg" alt="Blueprint-style drawing of a screen layout being assembled by construction workers with a crane"><br><sub><b>Blueprint style.</b> Grid, dimension lines and a crew of figures in one consistent technical drawing.</sub></td>
+    <td width="50%"><img src="docs/images/bilingual-logo.jpeg" alt="Logo with a green line-drawn bud icon, the Japanese word ツボ and the Latin word TSUBO"><br><sub><b>Bilingual logo.</b> Exact Japanese and Latin text rendered cleanly.</sub></td>
+    <td width="50%"><img src="docs/images/blueprint-illustration.jpeg" alt="Blueprint-style drawing of a screen layout being assembled by construction workers with a crane"><br><sub><b>Blueprint style.</b> Grid, dimension lines and a crew of figures in one consistent technical drawing.</sub></td>
+  </tr>
+</table>
+
+### Photoreal concepts
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/installation-mall.jpeg" alt="Photo of a Christmas tree wall made of bowling pins holding white flowers in a shopping mall, a parent and child looking at it"><br><sub><b>Concept visual in a real setting.</b> An installation that doesn't exist yet, shown at scale with people for reference.</sub></td>
+    <td width="50%"><img src="docs/images/installation-night.jpeg" alt="Photo at dusk of numbered pumpkin boats ridden by figures made of white flowers, lined up on a grass verge beside a road"><br><sub><b>An odd idea, made believable.</b> Numbered pumpkin racers on a roadside at dusk, with real-world lighting.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/still-life-photo.jpeg" alt="Photograph of a straw rope boat decorated with pine and red berries on a dark wooden workbench"><br><sub><b>Still-life photography.</b> Materials, texture and moody low-key light.</sub></td>
+    <td width="50%"><img src="docs/images/minimal-interior.jpeg" alt="Photo of a quiet building lobby with a single long branch of white camellias in a round clay vase"><br><sub><b>Minimal interior.</b> Restraint and negative space, with one element carrying the image.</sub></td>
+  </tr>
+</table>
+
+### A matched set: sketch, then photo, then detail
+
+Three prompts run one after another in the same chat. Each builds on the image before it, so the
+object stays the same while the medium and framing change. The sketch also carries Japanese
+measurement labels.
+
+<table>
+  <tr>
+    <td width="33%"><img src="docs/images/set-1-sketch.jpeg" alt="Watercolour design sketch of a tiered display of white ornamental cabbages with a red and white cord, Japanese measurement labels and a child for scale"><br><sub><b>1. Design sketch</b> with labelled dimensions.</sub></td>
+    <td width="33%"><img src="docs/images/set-2-photo.jpeg" alt="Photo of the same tiered ornamental cabbage display standing in a department store hall"><br><sub><b>2. The same object, photoreal,</b> placed in its setting.</sub></td>
+    <td width="33%"><img src="docs/images/set-3-detail.jpeg" alt="Close-up photo of white ornamental cabbages crossed by a red and white knotted cord above pine and red berries"><br><sub><b>3. Close-up detail</b> of the materials.</sub></td>
   </tr>
 </table>
 
