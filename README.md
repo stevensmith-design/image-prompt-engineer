@@ -101,8 +101,8 @@ already use.
      settings to pick.
 
    In Claude.ai and Claude Desktop, use the copy button on the **Prompt to paste** block. In Claude
-   Code (terminal or IDE) the skill also copies it to your clipboard for you, so you can paste it
-   straight away.
+   Code (terminal or IDE), say **copy** and the skill puts the prompt on your clipboard. It never
+   copies without asking, so it won't overwrite something you've already copied.
 4. **Paste it into your image app:**
    - **Nano Banana**: [Google AI Studio](https://aistudio.google.com) (pick the model, aspect ratio
      and resolution in the settings panel) or the Gemini app.

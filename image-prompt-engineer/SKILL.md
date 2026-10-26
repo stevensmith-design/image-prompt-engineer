@@ -270,9 +270,11 @@ out where the prompt starts. Put a bold label directly above each code block ("*
 one paragraph with no hard line breaks, except for GPT Image's labelled-section style, so it copies
 cleanly from a terminal.
 
-**Copy it to the clipboard when you can run commands** (Claude Code in a terminal or IDE). Once the
-prompt is final, copy it with the bundled helper, using a quoted heredoc so the shell leaves the
-text untouched:
+**Offer to copy it to the clipboard when you can run commands** (Claude Code in a terminal or IDE).
+Never copy without being asked: copying replaces whatever the user already has on their clipboard,
+and it can't be recovered. Add one line under the prompt: "Say **copy** and I'll put it on your
+clipboard." When the user says copy (or has asked for clipboard copies earlier in the
+conversation), run the bundled helper with a quoted heredoc so the shell leaves the text untouched:
 
 ```bash
 python3 <skill-dir>/scripts/copy_prompt.py <<'PROMPT'
@@ -280,10 +282,10 @@ python3 <skill-dir>/scripts/copy_prompt.py <<'PROMPT'
 PROMPT
 ```
 
-Then, in your reply, add one line under the prompt: "Copied to your clipboard. Paste it straight into <app>." If
-the user asks for the JSON instead, copy the JSON content fields. If the command fails or isn't
-allowed, say nothing about it: the code block is enough. In chat apps with no shell (Claude.ai,
-Claude Desktop), skip this, since code blocks already have a copy button.
+Then confirm in one line: "Copied. Paste it straight into <app>." If the user asks for the JSON
+instead, copy the JSON content fields. If the command fails, tell them to use the code block. In
+chat apps with no shell (Claude.ai, Claude Desktop), skip the offer, since code blocks already have
+a copy button.
 
 ---
 
