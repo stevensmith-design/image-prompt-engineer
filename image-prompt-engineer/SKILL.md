@@ -111,9 +111,11 @@ an array, e.g. `["text-to-image", "text-rendering"]`.
 The JSON has two kinds of fields:
 
 - **Content fields** describe the image. They go into the prompt.
-- **`output`** holds settings (model, aspect ratio, size, quality). These are set in the app or API,
-  not written into the prompt text. The one exception is apps with no setting for it, such as
-  ChatGPT, where the aspect ratio goes in the prompt (see the model's reference file).
+- **`output`** holds settings (model, aspect ratio, size, quality). Set them in the app or API
+  where the app has a setting for them. The one setting that always goes into the prompt text as
+  well is the **aspect ratio**: end the brief with it ("Wide 16:9 landscape format."). The Gemini
+  app and ChatGPT, where most people paste, have no aspect ratio setting, and it does no harm where
+  there is one.
 
 ```json
 {

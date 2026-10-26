@@ -38,10 +38,15 @@ All outputs carry a SynthID watermark.
 
 ## Where to paste
 
+Assume the **Gemini app** unless the user says otherwise: it's where most people use Nano Banana.
+
+- **Gemini app** (gemini.google.com or the mobile app): paste the prompt and send. The app has no
+  aspect ratio or resolution setting and may choose the model itself, so the brief must end with the
+  aspect ratio ("Wide 16:9 landscape format."). Don't promise a specific model or resolution here.
+  For text-heavy images, tell the user that results may vary with the model the app uses, and that
+  AI Studio lets them pick Nano Banana Pro.
 - **Google AI Studio** (aistudio.google.com): pick the model, aspect ratio and resolution in the
   settings panel, then paste the prompt. Best for control.
-- **Gemini app**: choose image creation and paste the prompt. The app picks the model and size, so
-  write the aspect ratio into the prompt as a closing sentence ("Wide 16:9 landscape format.").
 - **API / Vertex AI**: send the prompt as `input`, and set `aspect_ratio` and `image_size` in
   `response_format`. See `scripts/generate.py`.
 

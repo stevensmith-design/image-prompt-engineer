@@ -350,6 +350,6 @@ detail; JSON alone kept the detail but misread "left/right" seating and dropped 
     "aspect_ratio": "16:9",
     "resolution": "2K"
   },
-  "natural_language_prompt": "A cinematic film still of a late-night ramen stall in a narrow Tokyo alley in heavy rain, warm lantern light against the cold blue night. An elderly chef works behind the counter, facing two customers who sit side by side on adjacent stools on the same side of the counter: a young woman in a yellow raincoat and a tired salaryman. A hanging wooden menu board lists three dishes, and every line shows the Japanese name, the English name and the price together. A red paper lantern reads \"ラーメン\". Only the menu and lantern have readable text. Follow the details below exactly."
+  "natural_language_prompt": "A cinematic film still of a late-night ramen stall in a narrow Tokyo alley in heavy rain, warm lantern light against the cold blue night. An elderly chef works behind the counter, facing two customers who sit side by side on adjacent stools on the same side of the counter: a young woman in a yellow raincoat and a tired salaryman. A hanging wooden menu board lists three dishes, and every line shows the Japanese name, the English name and the price together. A red paper lantern reads \"ラーメン\". Only the menu and lantern have readable text. Follow the details below exactly. Wide 16:9 landscape format."
 }
 ```

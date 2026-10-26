@@ -112,8 +112,9 @@ already use.
    Code (terminal or IDE), say **copy** and the skill puts the prompt on your clipboard. It never
    copies without asking, so it won't overwrite something you've already copied.
 4. **Paste it into your image app:**
-   - **Nano Banana**: [Google AI Studio](https://aistudio.google.com) (pick the model, aspect ratio
-     and resolution in the settings panel) or the Gemini app.
+   - **Nano Banana**: the [Gemini app](https://gemini.google.com) (the aspect ratio is written into
+     the prompt, since the app has no setting for it) or [Google AI Studio](https://aistudio.google.com)
+     if you want to pick the model and resolution yourself.
    - **GPT Image**: ChatGPT (the aspect ratio is written into the prompt, since ChatGPT has no
      setting for it) or the OpenAI Playground.
 5. **Refine.** Tell the skill what to change ("warmer light", "move the mug left", "make the text
