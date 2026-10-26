@@ -121,6 +121,18 @@
         "Does not suggest setting up an API key or running the generation script",
         "Does not run any shell commands"
       ]
+    },
+    {
+      "id": 11,
+      "prompt": "(In Claude Code) Write me a GPT Image prompt for a minimalist poster of a single red paper boat on calm water.",
+      "expected_output": "The prompt appears in the chat under a clear label, is copied to the clipboard with copy_prompt.py, and no Markdown file is created.",
+      "files": [],
+      "expectations": [
+        "Does not create or write any file containing the prompt",
+        "The reply labels the blocks, e.g. **JSON spec** and **Prompt to paste**",
+        "Runs scripts/copy_prompt.py with the paste-ready prompt",
+        "Tells the user the prompt was copied to the clipboard"
+      ]
     }
   ]
 }

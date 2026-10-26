@@ -84,8 +84,37 @@ Download `image-prompt-engineer.skill` from the
 [latest release](../../releases/latest), then upload it under **Settings → Capabilities → Skills**.
 (To build it yourself, run `./build.sh`.)
 
-Then ask for an image prompt in plain words, for example "write me a GPT Image prompt for...". The
-skill triggers on its own.
+## How to use it
+
+No API key, no setup. You need the skill installed and an account with the image app you
+already use.
+
+1. **Ask for an image in plain words.** Name the model or app if you know it: "Write me a Nano
+   Banana prompt for a hero image of a quiet Kyoto tea house at dawn", or "I need a ChatGPT image
+   prompt for a logo sticker". The skill triggers on its own.
+2. **Answer a few questions,** or say "just go ahead" to skip them. The skill fills the gaps with
+   sensible defaults and tells you what it assumed.
+3. **Copy the prompt.** The reply has two labelled blocks:
+   - **JSON spec**: every decision about the image, field by field. Read this to check it, and to
+     say what to change.
+   - **Prompt to paste**: the prompt itself, with a line saying where to paste it and which
+     settings to pick.
+
+   In Claude.ai and Claude Desktop, use the copy button on the **Prompt to paste** block. In Claude
+   Code (terminal or IDE) the skill also copies it to your clipboard for you, so you can paste it
+   straight away.
+4. **Paste it into your image app:**
+   - **Nano Banana**: [Google AI Studio](https://aistudio.google.com) (pick the model, aspect ratio
+     and resolution in the settings panel) or the Gemini app.
+   - **GPT Image**: ChatGPT (the aspect ratio is written into the prompt, since ChatGPT has no
+     setting for it) or the OpenAI Playground.
+5. **Refine.** Tell the skill what to change ("warmer light", "move the mug left", "make the text
+   Japanese") and it updates the JSON and gives you a new prompt. To edit an image you've already
+   generated, attach it and say what to change and what must stay the same.
+
+Prefer prompting with JSON? Ask for the JSON version and paste the JSON spec instead.
+
+The skill answers in the chat. It doesn't write prompts to files unless you ask it to save them.
 
 ## Generating images from Claude Code (optional)
 

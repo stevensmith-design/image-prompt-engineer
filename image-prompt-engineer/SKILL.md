@@ -263,6 +263,28 @@ Always show the user all of this, in this order:
 Never reply with only the paste-ready prompt: the JSON is how the user sees and changes each part
 of the image.
 
+**Answer in the chat, never in a file.** Don't write the prompt or the JSON to a Markdown or other
+file unless the user asks you to save it. A file makes the user go and find it, open it, and work
+out where the prompt starts. Put a bold label directly above each code block ("**JSON spec**",
+"**Prompt to paste**") so the prompt is easy to find in a long reply. Write the prompt to paste as
+one paragraph with no hard line breaks, except for GPT Image's labelled-section style, so it copies
+cleanly from a terminal.
+
+**Copy it to the clipboard when you can run commands** (Claude Code in a terminal or IDE). Once the
+prompt is final, copy it with the bundled helper, using a quoted heredoc so the shell leaves the
+text untouched:
+
+```bash
+python3 <skill-dir>/scripts/copy_prompt.py <<'PROMPT'
+<the prompt to paste, exactly as shown>
+PROMPT
+```
+
+Then, in your reply, add one line under the prompt: "Copied to your clipboard. Paste it straight into <app>." If
+the user asks for the JSON instead, copy the JSON content fields. If the command fails or isn't
+allowed, say nothing about it: the code block is enough. In chat apps with no shell (Claude.ai,
+Claude Desktop), skip this, since code blocks already have a copy button.
+
 ---
 
 ## Step 7 — Generate and Review (optional, Claude Code)

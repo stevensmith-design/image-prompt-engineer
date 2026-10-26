@@ -13,4 +13,5 @@ First public release. Grew out of `nano-banana-prompter`.
   with a dry-run mode and a JSON record saved next to every image.
 - Generate-and-review loop for Claude Code.
 - Copy and paste is the default; API generation is opt-in and never pushed.
-- Eight worked examples and ten evals.
+- Prompts are answered in the chat with labelled blocks, never written to a file unless asked, and copied to the clipboard in Claude Code (`scripts/copy_prompt.py`).
+- Eight worked examples and eleven evals.
