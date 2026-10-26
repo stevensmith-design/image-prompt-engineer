@@ -1,4 +1,4 @@
 dist/
-images/
+/images/
 __pycache__/
 .DS_Store

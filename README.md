@@ -12,6 +12,25 @@ You copy it and paste it into the Gemini app or ChatGPT. No API key or setup nee
 If you do have an API key, there's an optional script that lets Claude Code generate the image,
 review it against the spec and refine it. You don't need it to use the skill.
 
+## Made with it
+
+All generated with Nano Banana in the Gemini app, from prompts written by this skill's earlier
+version.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/editorial-illustration.jpeg" alt="Hand-drawn illustration of a climber in an orange helmet abseiling down a wall of stacked blocks while small yellow characters build it"><br><sub><b>Editorial illustration.</b> A consistent character style, several figures, each doing something different.</sub></td>
+    <td width="50%"><img src="docs/images/still-life-photo.jpeg" alt="Photograph of a straw rope boat decorated with pine and red berries on a dark wooden workbench"><br><sub><b>Still-life photography.</b> Materials, texture and moody low-key light.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/bilingual-logo.jpeg" alt="Logo with a green line-drawn bud icon, the Japanese word ツボ and the Latin word TSUBO"><br><sub><b>Bilingual logo.</b> Exact Japanese and Latin text rendered cleanly.</sub></td>
+    <td width="50%"><img src="docs/images/text-in-illustration.jpeg" alt="Illustration of a small character on a stool pinning up a House rules poster next to an easel"><br><sub><b>Text inside an illustration.</b> The exact words, in the drawing's own style.</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/images/blueprint-illustration.jpeg" alt="Blueprint-style drawing of a screen layout being assembled by construction workers with a crane"><br><sub><b>Blueprint style.</b> Grid, dimension lines and a crew of figures in one consistent technical drawing.</sub></td>
+  </tr>
+</table>
+
 ## Why JSON
 
 A one-line prompt leaves most decisions to the model. A JSON spec makes every decision explicit:

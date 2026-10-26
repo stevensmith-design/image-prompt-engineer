@@ -19,4 +19,5 @@ First public release.
   "copy".
 - Optional `scripts/generate.py` (Python standard library only) to generate and edit images through
   the Gemini or OpenAI API, with a dry-run mode and a record of the prompt saved next to each image.
+- Example images in the README, made with Nano Banana from prompts this skill wrote.
 - Thirteen evals.
