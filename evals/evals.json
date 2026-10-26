@@ -109,6 +109,18 @@
         "States that the skill is tuned for Nano Banana and GPT Image",
         "Notes that Midjourney's parameter syntax needs adapting by hand, or offers a prose prompt that can be adapted"
       ]
+    },
+    {
+      "id": 10,
+      "prompt": "Can you make me a prompt for a Nano Banana image of a lighthouse in a storm? I'll paste it into the Gemini app.",
+      "expected_output": "A complete copy-and-paste answer. No mention of API keys, scripts or setup.",
+      "files": [],
+      "expectations": [
+        "Gives a paste-ready prompt in its own code block",
+        "Tells the user to paste it into the Gemini app and writes the aspect ratio into the prompt text",
+        "Does not suggest setting up an API key or running the generation script",
+        "Does not run any shell commands"
+      ]
     }
   ]
 }

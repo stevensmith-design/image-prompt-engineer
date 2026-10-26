@@ -12,4 +12,5 @@ First public release. Grew out of `nano-banana-prompter`.
 - Optional `scripts/generate.py` (standard library only) to generate and edit images from a spec,
   with a dry-run mode and a JSON record saved next to every image.
 - Generate-and-review loop for Claude Code.
-- Eight worked examples and nine evals.
+- Copy and paste is the default; API generation is opt-in and never pushed.
+- Eight worked examples and ten evals.

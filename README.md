@@ -4,9 +4,12 @@ A Claude skill that turns a rough image idea into a structured JSON prompt, then
 prompt for **Nano Banana** (Google Gemini Image) or **GPT Image** (OpenAI / ChatGPT).
 
 It runs a short creative interview, fills in a JSON spec covering subject, composition, lighting,
-camera, text and references, and assembles a paste-ready prompt that follows each model's own
-prompting rules. In Claude Code it can also generate the image, review it against the spec and
-refine it.
+camera, text and references, and assembles a prompt that follows each model's own prompting rules.
+You copy it and paste it into the Gemini app, Google AI Studio or ChatGPT. No API key or setup
+needed.
+
+If you do have an API key, there's an optional script that lets Claude Code generate the image,
+review it against the spec and refine it. You don't need it to use the skill.
 
 ## Why JSON
 
@@ -86,6 +89,8 @@ skill triggers on its own.
 
 ## Generating images from Claude Code (optional)
 
+Skip this section if you just want prompts to paste. The skill never asks you to set up an API.
+
 The skill includes [`scripts/generate.py`](image-prompt-engineer/scripts/generate.py), a small
 script that sends a JSON spec straight to the Gemini or OpenAI API. It needs only Python 3, no
 packages.
@@ -110,7 +115,7 @@ account, so the skill asks before generating several images or using the most ex
 
 [`evals/evals.json`](evals/evals.json) holds test prompts with checks for the behaviours that
 matter: skipping the interview when told to, picking the right model, valid sizes, quoting text,
-numbering references, handling unsupported requests. Run them with Anthropic's
+numbering references, handling unsupported requests, and never pushing API setup on someone who just wants a prompt. Run them with Anthropic's
 [skill-creator](https://github.com/anthropics/skills) eval tooling.
 
 ## Keeping it current

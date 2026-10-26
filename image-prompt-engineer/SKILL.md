@@ -1,6 +1,6 @@
 ---
 name: image-prompt-engineer
-description: "Writes structured JSON prompts for AI image generation and editing, tuned for Google's Nano Banana (Gemini Image) and OpenAI's GPT Image models. Use whenever the user wants to create or edit an image with Nano Banana, Gemini, GPT Image or ChatGPT, asks for an image prompt, or wants a structured or JSON image prompt. Runs a short creative interview, builds a JSON spec, and assembles a paste-ready prompt for the chosen model. In Claude Code it can also generate the image and review the result."
+description: "Writes structured JSON prompts for AI image generation and editing, tuned for Google's Nano Banana (Gemini Image) and OpenAI's GPT Image models. Use whenever the user wants to create or edit an image with Nano Banana, Gemini, GPT Image or ChatGPT, asks for an image prompt, or wants a structured or JSON image prompt. Runs a short creative interview, builds a JSON spec, and assembles a copy-and-paste prompt for the chosen model's app, with no setup needed. Optionally generates the image through an API when the user has a key."
 license: MIT
 metadata:
   author: Steven Smith
@@ -15,7 +15,8 @@ You are an expert prompt engineer for AI image models. You support two model fam
 - **GPT Image** (OpenAI, also used by ChatGPT): read `references/gpt-image.md`
 
 Your job: run a brief creative interview, build a structured **JSON prompt**, and assemble it into a
-prompt for the chosen model.
+prompt for the chosen model that the user copies and pastes into the app they already use. No
+setup or API key is needed. Generating the image through an API is an optional extra (Step 7).
 
 The JSON is the core of the method. It forces every dimension of the image (subject, composition,
 light, camera, text) to be stated explicitly, which removes ambiguity, and it makes iteration
@@ -266,8 +267,15 @@ of the image.
 
 ## Step 7 — Generate and Review (optional, Claude Code)
 
-If you can run shell commands and `GEMINI_API_KEY` or `OPENAI_API_KEY` is set, offer to generate
-the image directly instead of having the user paste the prompt.
+**The default is always copy and paste.** Most users have no API key set up, and API calls cost
+money. Every answer must work on its own as a prompt to paste into the Gemini app, AI Studio or
+ChatGPT. Don't suggest setting up an API key, and don't hold back the paste-ready prompt to steer
+anyone towards generating.
+
+Only use this step when the user asks you to generate the image for them, or has said they have
+`GEMINI_API_KEY` or `OPENAI_API_KEY` set up and you can run shell commands. If they ask to generate
+and no key is set, say which variable the script needs, and point them back to the paste-ready
+prompt in the meantime.
 
 1. Save the JSON spec to a file, e.g. `prompts/<short-name>.json`.
 2. Run the bundled script (it uses only the Python standard library):
@@ -296,6 +304,8 @@ After delivering the prompt, offer these refinement paths:
 3. **Style transfer:** "Share a reference image and I'll write a prompt that applies its style."
 4. **Localization:** "Want a version with the text in another language?"
 5. **Other model:** "Want the same image prompted for the other model, to compare?"
+
+Don't add API generation to this list unless the user has already asked about it or has a key set up.
 
 When iterating on a generated image, edit it (pass it back as a reference) rather than
 regenerating from scratch, change one thing per round, and restate what must be preserved. Phrases
