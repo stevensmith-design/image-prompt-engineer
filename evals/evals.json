@@ -1,0 +1,114 @@
+{
+  "skill_name": "image-prompt-engineer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Just go ahead and write me an image prompt for a hero image of a quiet Kyoto tea house at dawn for my blog. Don't ask questions.",
+      "expected_output": "No interview. Assumptions line, full JSON spec targeting Nano Banana 2.1 at 16:9, paste-ready prose prompt, where to paste, refinement options.",
+      "files": [],
+      "expectations": [
+        "Does not ask any questions before producing the prompt",
+        "Includes a one-line assumptions note that names the assumed model",
+        "Shows a JSON code block with operation, subject and output fields",
+        "output.model is gemini-nano-banana-2.1 and output.aspect_ratio is 16:9",
+        "Shows the natural_language_prompt again on its own in a plain code block",
+        "Says where to paste it and which settings to choose",
+        "Ends with refinement options"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need a logo sticker for my coffee brand 'Slow Pour' with a transparent background. I'll use the OpenAI API.",
+      "expected_output": "Targets GPT Image, sets background transparent, quotes the exact brand text, sets a 1:1 size.",
+      "files": [],
+      "expectations": [
+        "output.model is a GPT Image 2.5 model ID (gpt-image-2.5-sunburst or gpt-image-2.5-flare)",
+        "output.background is transparent",
+        "output.size is a valid WIDTHxHEIGHT such as 1024x1024",
+        "The prompt puts \"Slow Pour\" (or \"SLOW POUR\") in double quotes",
+        "The prompt says no other text should appear",
+        "Does not use a Nano Banana resolution field like 2K in output"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a ChatGPT image prompt: a cosy reading nook with a cat on the windowsill, rainy day, portrait format.",
+      "expected_output": "Targets GPT Image via ChatGPT and writes the orientation/aspect ratio into the prompt text because ChatGPT has no size setting.",
+      "files": [],
+      "expectations": [
+        "Targets GPT Image, not Nano Banana",
+        "The paste-ready prompt itself states the portrait orientation or a portrait aspect ratio such as 2:3 or 4:5",
+        "Tells the user to paste it into ChatGPT"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I have 3 photos: my product (a ceramic vase), a photo of a Scandinavian living room, and a moodboard image with the colour palette I want. Make a prompt for GPT Image that combines them.",
+      "expected_output": "Multimodal framework; numbered references with roles; prompt refers to Image 1/2/3; preserves product appearance; mentions the edits endpoint or attaching images in order.",
+      "files": [],
+      "expectations": [
+        "framework includes multimodal",
+        "references array has three entries, each with an image number and a role",
+        "The prompt refers to the inputs as Image 1, Image 2 and Image 3",
+        "The prompt says the vase's appearance must be preserved",
+        "Tells the user to attach the images in the same order"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Make me a GPT Image prompt that shows today's actual weather in Melbourne as a postcard illustration.",
+      "expected_output": "Recognises GPT Image cannot search; looks up or asks for the weather, or offers Nano Banana with search grounding.",
+      "files": [],
+      "expectations": [
+        "Says the GPT Image API cannot search the web, or that ChatGPT must search first",
+        "Either asks for or looks up the weather, or offers Nano Banana with search grounding as an alternative",
+        "Does not write a prompt that tells GPT Image to search the web"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Create a Nano Banana prompt for an event poster: headline 'Design Systems Night', subtitle 'Tokyo · 14 November', and I also want a Japanese version.",
+      "expected_output": "Text rendering + localization; exact text quoted; Japanese localization; may recommend Nano Banana Pro for text-heavy work.",
+      "files": [],
+      "expectations": [
+        "framework includes text-rendering",
+        "text_elements contains 'Design Systems Night' and 'Tokyo · 14 November' exactly",
+        "localization.target_languages includes Japanese",
+        "The prompt puts each line of text in double quotes"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Here's an image I generated of a kitchen. I want to change the countertop to white marble but keep everything else the same. I'm using Gemini.",
+      "expected_output": "Edit operation; a preserve list; prompt states one change and lists what stays.",
+      "files": [],
+      "expectations": [
+        "operation is edit",
+        "The JSON has a preserve field listing what must stay the same",
+        "The prompt describes exactly one change (the countertop)",
+        "The prompt says everything else should stay the same"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "I need an ultra-wide 8:1 website banner of a mountain range for GPT Image.",
+      "expected_output": "Flags that GPT Image can't go beyond 3:1, and offers 3:1 or Nano Banana 2.1 which supports 8:1.",
+      "files": [],
+      "expectations": [
+        "Says GPT Image does not support 8:1 (maximum 3:1)",
+        "Offers a 3:1 size or suggests Nano Banana 2.1 for a true 8:1",
+        "Any GPT Image size given is a valid size within the 3:1 limit"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Write me a Midjourney prompt with --ar and --stylize for a cyberpunk city.",
+      "expected_output": "Says the skill is tuned for Nano Banana and GPT Image and does not invent Midjourney parameter guidance as if it were supported.",
+      "files": [],
+      "expectations": [
+        "States that the skill is tuned for Nano Banana and GPT Image",
+        "Notes that Midjourney's parameter syntax needs adapting by hand, or offers a prose prompt that can be adapted"
+      ]
+    }
+  ]
+}
