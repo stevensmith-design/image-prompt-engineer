@@ -7,6 +7,8 @@ First public release.
 - Writes image prompts for Nano Banana (Gemini Image) and GPT Image (OpenAI / ChatGPT).
 - One prompt to paste: a short plain-language brief on top (scene, mood, how elements relate, the
   rules that must not fail, the aspect ratio), with the JSON details underneath.
+- Prompt first, questions after: you get a finished prompt in the first reply, with sensible
+  defaults and a few optional tweaks.
 - Works by copy and paste in the free Gemini app or ChatGPT. No API key or setup.
 - Each prompt comes with four short instructions: where to paste it (new chat or the same one),
   the target size, what to attach, then the prompt.

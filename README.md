@@ -1,16 +1,29 @@
 # Image Prompt Engineer
 
-A Claude skill that writes detailed image prompts for you. Describe the image in a sentence; get
-back a prompt for **Nano Banana** (Google Gemini Image) or **GPT Image** (OpenAI / ChatGPT) that
-spells out everything the model needs to get it right.
+**High-quality AI images, without learning how to write prompts.**
 
-Writing a good image prompt by hand takes time: subject, framing, light, lens, materials, exact
-text, who stands where. This skill does that work. It runs a short creative interview (or skips it
-if you say "just go"), fills in every detail, and writes the prompt the way each model reads best.
-You copy it and paste it into the Gemini app or ChatGPT. No API key or setup needed.
+Great AI images come from detailed prompts: the subject, the framing, the light, the lens, the
+materials, the exact text, who stands where. Most people don't have the time or the know-how to
+write all that, so they type a short sentence and get a generic result.
 
-If you do have an API key, there's an optional script that lets Claude Code generate the image,
-review it against the spec and refine it. You don't need it to use the skill.
+This Claude skill writes the detailed prompt for you. Tell Claude what you want in plain words and
+it gives you one finished prompt straight away, written the way the image model reads best. It
+fills in the details you didn't mention with sensible choices, tells you what it chose, and offers
+a couple of optional tweaks. Copy it, paste it into the **Gemini app**
+(Nano Banana) or **ChatGPT** (GPT Image), and you're done. No API key, no setup, no prompt
+engineering.
+
+### Quick start
+
+1. **Install the skill.** Download `image-prompt-engineer.skill` from the
+   [latest release](https://github.com/stevensmith-design/image-prompt-engineer/releases/latest)
+   and upload it in Claude under **Settings → Capabilities → Skills**. (Claude Code users: see
+   [Install](#install).)
+2. **Ask Claude for an image** in your own words: *"I need a cosy hero image for my bakery's
+   website, for Gemini."*
+3. **Copy the prompt** Claude gives you, paste it into Gemini or ChatGPT, and get your image.
+   Want changes? Tell Claude ("warmer light", "add the shop name on the sign") and it rewrites
+   the prompt.
 
 ## Made with it
 
@@ -27,7 +40,7 @@ with Nano Banana in the Gemini app, from prompts written by this skill or its ea
     <td width="50%"><img src="docs/images/text-in-illustration.jpeg" alt="Illustration of a small character on a stool pinning up a House rules poster next to an easel"><br><sub><b>Text inside an illustration.</b> The exact words, in the drawing's own style.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/images/bilingual-logo.jpeg" alt="Logo with a green line-drawn bud icon, the Japanese word ツボ and the Latin word TSUBO"><br><sub><b>Bilingual logo.</b> Exact Japanese and Latin text rendered cleanly.</sub></td>
+    <td width="50%"><img src="docs/images/bilingual-logo.jpeg" alt="Logo with a green line-drawn bud icon above a Japanese word in katakana and its Latin spelling"><br><sub><b>Bilingual logo.</b> Exact Japanese and Latin text rendered cleanly.</sub></td>
     <td width="50%"><img src="docs/images/blueprint-illustration.jpeg" alt="Blueprint-style drawing of a screen layout being assembled by construction workers with a crane"><br><sub><b>Blueprint style.</b> Grid, dimension lines and a crew of figures in one consistent technical drawing.</sub></td>
   </tr>
 </table>
@@ -73,7 +86,10 @@ measurement labels.
   </tr>
 </table>
 
-## Why JSON
+## How it works
+
+You don't need to read this section to use the skill. It's here for anyone curious about why the
+prompts look the way they do.
 
 A one-line prompt leaves most decisions to the model. A JSON spec makes every decision explicit:
 what the subject is, how it's framed, where the light comes from, what text appears and in which
@@ -122,8 +138,7 @@ the date it was last checked against the official docs.
 
 > **You:** Hero image for a blog post about slow mornings. Warm, quiet, a bit cinematic. For Nano Banana.
 
-The skill asks one or two questions if it needs to (or skips them if you say "just go"), then
-returns one prompt to paste:
+The skill writes the prompt straight away and returns it with short instructions:
 
 ```
 A cinematic lifestyle photo of a ceramic mug of black coffee on a worn oak windowsill, a thin ribbon of steam rising, in a small apartment kitchen with soft city rooftops blurred outside the window. The mug sits in the lower-left third, with wide, empty window light above for a headline. Low early-morning sun from the right casts long, soft shadows, warm amber highlights against muted shadows. Wide 16:9 landscape format.
@@ -169,8 +184,9 @@ already use.
 1. **Ask for an image in plain words.** Name the model or app if you know it: "Write me a Nano
    Banana prompt for a hero image of a quiet Kyoto tea house at dawn", or "I need a ChatGPT image
    prompt for a logo sticker". The skill triggers on its own.
-2. **Answer a few questions,** or say "just go ahead" to skip them. The skill fills the gaps with
-   sensible defaults and tells you what it assumed.
+2. **Get your prompt straight away.** The skill fills any gaps with sensible choices and tells
+   you what it chose in one line. It asks first only when it can't make a sensible image without
+   you, for example when you mention a photo you haven't attached.
 3. **Follow the short instructions and copy the prompt.** Each prompt comes with four lines telling
    you what to do: where to paste it (and whether in a new chat or the same one), the target size,
    what to attach, then the prompt itself in one block. The block has a plain-language brief on top
@@ -206,6 +222,10 @@ The skill answers in the chat. It doesn't write prompts to files unless you ask 
 
 Skip this section if you just want prompts to paste. The skill never asks you to set up an API.
 
+> **Early extra.** The script is new and has only been tested with dry runs, not yet against the
+> live APIs. If something breaks, please [open an issue](https://github.com/stevensmith-design/image-prompt-engineer/issues).
+> Copy and paste is the main way to use this skill and doesn't depend on it.
+
 The skill includes [`scripts/generate.py`](image-prompt-engineer/scripts/generate.py), a small
 script that sends a JSON spec straight to the Gemini or OpenAI API. It needs only Python 3, no
 packages.
@@ -230,7 +250,7 @@ account, so the skill asks before generating several images or using the most ex
 ## Evals
 
 [`evals/evals.json`](evals/evals.json) holds test prompts with checks for the behaviours that
-matter: skipping the interview when told to, picking the right model, valid sizes, quoting text,
+matter: giving a prompt in the first reply, picking the right model, valid sizes, quoting text,
 numbering references, handling unsupported requests, and never pushing API setup on someone who just wants a prompt. Run them with Anthropic's
 [skill-creator](https://github.com/anthropics/skills) eval tooling.
 
