@@ -44,7 +44,8 @@ Only use `xhigh` or `max` when a lower setting has visibly failed: they are slow
 
 **Background:** `transparent` for logos, stickers and cut-outs. Needs PNG or WebP output.
 
-**`n`:** number of images per request. Useful for logo or layout variations.
+**`n`:** number of images per request. Each image is billed, so only set it above 1 when the user
+asks for variations.
 
 ## Defaults
 

@@ -48,7 +48,8 @@ complex scene splits between brief and details.
 For any other image model (Midjourney, Flux, Stable Diffusion, Ideogram), say this skill is tuned for
 Nano Banana and GPT Image. The prose prompt usually still works with models that read full
 sentences. Models that use their own syntax (Midjourney parameters, Stable Diffusion negative
-prompts) need adapting by hand.
+prompts) need adapting by hand. Don't invent parameter values or settings for those models: give
+the prose prompt and say which parts the user will need to convert.
 
 ---
 
@@ -65,8 +66,10 @@ often also a Text-to-Image prompt.
 | 4 | **Text Rendering / Localization** | The image must contain readable text, typography, or multilingual content |
 | 5 | **Creative Director** | High-end output with explicit camera, lens, lighting and film stock control |
 
-Web search grounding is a Nano Banana feature. For GPT Image, see the workaround in
-`references/gpt-image.md`.
+Web search grounding is a Nano Banana feature. For GPT Image, don't use the web-search framework
+or the `web_search` field: get the facts first (look them up if you can, or ask the user, or have
+them ask ChatGPT to search in the same chat), then write those facts into a text-to-image prompt
+as plain description. See `references/gpt-image.md`.
 
 ---
 
@@ -339,7 +342,9 @@ pins down every detail (see Step 5). Show the user, in this order:
    - **Where:** the free app, and whether to start a **new chat** or stay in the **same chat**. Use
      a new chat for an unrelated image, so earlier images don't bleed into the style. Use the same
      chat for an edit or the next image in a set ("in the same chat, after the hero photo you just
-     made"). Add the paid option only as a short aside: "For 2K, use AI Studio with a paid API key."
+     made"). Name only the free app. Mention paid tools (AI Studio, the OpenAI Playground or API)
+     only if the user brought them up, or asked for something the free apps can't do, such as an
+     exact 2K or 4K file.
    - **Target:** the aspect ratio, plus a minimum pixel size when the use needs one (print, a slide,
      a banner).
    - **Attach:** which images to attach, in order and by role ("Image 1: your product photo. Image
@@ -351,8 +356,9 @@ pins down every detail (see Step 5). Show the user, in this order:
    - a blank line, then
    - the JSON content fields, pretty-printed. Leave out `output` (those are settings, chosen in the
      app) and `natural_language_prompt` (it's already on top).
-5. **Refinements**: the two or three optional questions from Step 3 that would most change the
-   result, then the refinement paths from Step 8, as one short list.
+5. **Refinements**: one short list of no more than four items: the two or three optional
+   questions from Step 3 that would most change the result, then at most one or two refinement
+   paths from Step 8 that fit this image.
 
 Keep the instructions to four short bullets. They must work whatever tool the user pastes into,
 since you usually won't know, so name the free app first and don't ask which app they use just to
@@ -363,7 +369,7 @@ Example:
 ````markdown
 **Prompt 1 of 2: hero photo**
 
-- **Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+- **Where:** the Gemini app, in a new chat.
 - **Target:** 16:9, at least 1024×576 px.
 - **Attach:** nothing.
 - **Paste:**

@@ -36,7 +36,7 @@ SKILL.md: the `natural_language_prompt` on top, then the JSON without `output` a
 }
 ```
 
-Instructions: "**Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+Instructions: "**Where:** the Gemini app, in a new chat.
 **Target:** portrait 4:5. **Attach:** nothing."
 
 ---
@@ -106,8 +106,7 @@ Instructions: "**Where:** the Gemini app, in a new chat. For 2K, use AI Studio w
 }
 ```
 
-Instructions: "**Where:** ChatGPT, in a new chat. With a paid API key, use the edits endpoint at
-1536x1024, quality high. **Target:** landscape 3:2. **Attach:** Image 1: the bottle photo. Image 2:
+Instructions: "**Where:** ChatGPT, in a new chat. **Target:** landscape 3:2. **Attach:** Image 1: the bottle photo. Image 2:
 the meadow photo, in that order."
 
 ---
@@ -236,8 +235,7 @@ translated into Japanese." Check the translation with a native speaker before us
 ```
 
 Uses GPT Image's labelled-section style, one line per section. Instructions: "**Where:** ChatGPT, in
-a new chat. With a paid API key, set background to transparent, PNG, 1024x1024. **Target:** square
-1:1, transparent background. **Attach:** nothing."
+a new chat. **Target:** square 1:1, transparent background. **Attach:** nothing."
 
 ---
 
@@ -373,7 +371,7 @@ Assumptions: Nano Banana 2.1, portrait 4:5, cinematic studio lighting.
 
 **Prompt: fashion editorial**
 
-- **Where:** the Gemini app, in a new chat. For 2K, use AI Studio with a paid API key.
+- **Where:** the Gemini app, in a new chat.
 - **Target:** portrait 4:5, at least 1024×1280 px for print.
 - **Attach:** nothing.
 - **Paste:**
