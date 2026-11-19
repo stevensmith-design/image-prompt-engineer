@@ -2,6 +2,8 @@
 
 **High-quality AI images, without learning how to write prompts.**
 
+Made by Steven Smith. More of my work: [stevensmith.dev](https://stevensmith.dev)
+
 Great AI images come from detailed prompts: the subject, the framing, the light, the lens, the
 materials, the exact text, who stands where. Most people don't have the time or the know-how to
 write all that, so they type a short sentence and get a generic result.
