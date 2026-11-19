@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- README: links to stevensmith.dev carry `utm_source=github` and the repo name, so visits from the repo can be counted.
 - README: a "Made by" line linking to stevensmith.dev, and one example image under it.
 
 ## 1.0.0 — 2026-10-26

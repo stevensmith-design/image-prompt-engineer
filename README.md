@@ -2,7 +2,7 @@
 
 **High-quality AI images, without learning how to write prompts.**
 
-Made by Steven Smith. More of my work: [stevensmith.dev](https://stevensmith.dev)
+Made by Steven Smith. More of my work: [stevensmith.dev](https://stevensmith.dev?utm_source=github&utm_campaign=image-prompt-engineer)
 
 <img src="docs/images/ramen-stall-json-only.jpeg" alt="Cinematic photo of a ramen stall in a rainy Tokyo alley at night: an elderly chef ladling broth, a woman in a yellow raincoat and a tired salaryman at opposite ends of the counter, red lanterns reading ラーメン, a Japanese menu board">
 
