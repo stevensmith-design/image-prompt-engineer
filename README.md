@@ -4,6 +4,10 @@
 
 Made by Steven Smith. More of my work: [stevensmith.dev](https://stevensmith.dev)
 
+<img src="docs/images/ramen-stall-json-only.jpeg" alt="Cinematic photo of a ramen stall in a rainy Tokyo alley at night: an elderly chef ladling broth, a woman in a yellow raincoat and a tired salaryman at opposite ends of the counter, red lanterns reading ラーメン, a Japanese menu board">
+
+<sub>Made with Nano Banana from a prompt this skill wrote. More examples under [Made with it](#made-with-it).</sub>
+
 Great AI images come from detailed prompts: the subject, the framing, the light, the lens, the
 materials, the exact text, who stands where. Most people don't have the time or the know-how to
 write all that, so they type a short sentence and get a generic result.
